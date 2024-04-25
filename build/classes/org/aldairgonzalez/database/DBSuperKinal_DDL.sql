@@ -49,7 +49,7 @@ create table Empleados (
     sueldo decimal(10,2) not null,
     horaEntrada time not null,
     horaSalida time not null,
-    cargoId int not null ,
+    cargoId int not null,
     encargadoId int,
     primary key PK_empleadoId (empleadoId),
     constraint FK_Empleado_Cargos foreign key (cargoId)
@@ -137,6 +137,3 @@ create table DetalleCompra (
 	constraint FK_DetalleCompra_Compras foreign key (compraId)
 		references Compras (compraId)
 );
-
-insert into Facturas (fecha, hora, clienteId, empleadoId) values
-	('2024-04-25', 1600, 1, 1);
