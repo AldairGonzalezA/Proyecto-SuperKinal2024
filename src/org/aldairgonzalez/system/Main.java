@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.aldairgonzalez.controller.FormClientesController;
+import org.aldairgonzalez.controller.MenuCargosController;
 import org.aldairgonzalez.controller.MenuClientesController;
 import org.aldairgonzalez.controller.MenuPrincipalController;
 import org.aldairgonzalez.controller.MenuTicketSoporteController;
@@ -87,6 +88,15 @@ public class Main extends Application {
         }catch(Exception e){
             System.out.println(e.getMessage());
             e.printStackTrace();
+        }
+    }
+    
+    public void menuCargosView(){
+        try{
+            MenuCargosController menuCargosView = (MenuCargosController)switchScene("MenuCargosView.fxml",1200,650);
+            menuCargosView.setStage(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
         }
     }
     

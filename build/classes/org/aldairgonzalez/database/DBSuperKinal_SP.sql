@@ -64,11 +64,11 @@ DELIMITER ;
 DELIMITER $$
 create procedure sp_agregarCargo(nomCar varchar(30), desCar varchar(100)) 
 begin
-		insert into Cargos(nombreCargo, descripcionCargo) values
-        (nomC,desCar);
+		insert into Cargos(nomC,desCar) values
+        (nombreCargo, descripcionCargo);
 end$$
-DELIMITER ;
- 
+DELIMITER ;nombreCargo, descripcionCargo
+ call sp_agregarCargo('Prueba', 'Prueba');
 DELIMITER $$
 create procedure sp_listarCargos()
 begin 
