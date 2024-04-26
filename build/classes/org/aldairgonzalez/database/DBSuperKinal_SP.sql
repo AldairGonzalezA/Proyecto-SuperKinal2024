@@ -237,11 +237,12 @@ DELIMITER ;
 DELIMITER  $$
 create procedure sp_agregarEmpleados(in nomEmp varchar(30),in apeEmp varchar(30), in sue decimal(10, 2), in hoEn time, in hoSa time, in carId int, in encarId int)
 	begin
-		insert into Empleados (nomEmp, apeEmp, sue, hoEn, hoSa, carid, encarId) values
-			(nombreEmpleado, apellidoEmpleado, sueldo, horaEntrada, horaSalida, cargoId, encargadoId);
+		insert into Empleados (nombreEmpleado, apellidoEmpleado, sueldo, horaEntrada, horaSalida, cargoId, encargadoId) values
+			(nomEmp, apeEmp, sue, hoEn, hoSa, carid, encarId);
     end $$
 DELIMITER ;
- 
+ call sp_agregarEmpleados('Pedro', 'Navaja', 250.00, 0800, 1700, null, null);
+
 DELIMITER $$
 create procedure sp_listarEmpleados()
 	begin
@@ -331,25 +332,24 @@ DELIMITER ;
  
 -- CRUD Ticket Soporte ////////////////////////////////////////////
 DELIMITER $$
-create procedure sp_AgregarTicketSoporte(in des varchar(250), in est varchar(30), in cliId int, in facId int)
+create procedure sp_AgregarTicketSoporte(in des varchar(250), in cliId int, in facId int)
 begin
 	insert into TicketSoporte(descripcionTicket,estatus,clienteId,facturaId) values
-		(des,est,cliId,facId);
+		(des,'Recien Creado',cliId,facId);
 end $$
 DELIMITER ;
-
+drop procedure sp_AgregarTicketSoporte;
 DELIMITER $$
 create procedure sp_ListarTicketSoporte()
 begin
-	select 
-		TicketSoporte.ticketSoporteId,
-        TicketSoporte.descripcionTicket,
-        TicketSoporte.estatus,
-        TicketSoporte.clienteId,
-        TicketSoporte.facturaId
-			from TicketSoporte;
+	select TS.ticketSoporteId, TS.descripcionTicket, TS.estatus,
+			CONCAT('ID : ',C.clienteId,' | ' ,C.nombre, C.apellido) as 'Cliente', TS.facturaId from TicketSoporte TS
+    join Clientes C on TS.clienteId = c.clienteId;
+		
 end $$
 DELIMITER ;
+
+-- drop procedure sp_ListarTicketSoporte;
 
 DELIMITER $$
 create procedure sp_EliminarTicketSoporte(in tikId int)

@@ -21,7 +21,7 @@
       <TextArea fx:id="taDescripcion" layoutX="33.0" layoutY="262.0" prefHeight="140.0" prefWidth="353.0" wrapText="true" />
       <ComboBox fx:id="cmbClientes" layoutX="406.0" layoutY="169.0" prefHeight="25.0" prefWidth="200.0" />
       <ComboBox fx:id="cmbFactura" layoutX="679.0" layoutY="169.0" prefHeight="25.0" prefWidth="200.0" />
-      <TableView fx:id="tblTickets" layoutX="406.0" layoutY="229.0" prefHeight="384.0" prefWidth="758.0">
+      <TableView fx:id="tblTickets" layoutX="406.0" layoutY="229.0" onMouseClicked="#cargarDatosEditar" prefHeight="384.0" prefWidth="758.0">
         <columns>
           <TableColumn fx:id="colTicketId" prefWidth="75.0" text="Ticket Id" />
           <TableColumn fx:id="colDescripcion" prefWidth="280.6666259765625" text="Descripcion" />
@@ -33,5 +33,6 @@
       <ComboBox fx:id="cmbEstatus" layoutX="33.0" layoutY="446.0" prefHeight="25.0" prefWidth="198.0" />
       <Button fx:id="btnGuardar" layoutX="40.0" layoutY="487.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="37.0" prefWidth="115.0" text="Guardar" />
       <Button fx:id="btnRegresar" layoutX="40.0" layoutY="575.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="37.0" prefWidth="115.0" text="Regresar" />
+      <Button fx:id="btnVaciar" layoutX="193.0" layoutY="487.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="37.0" prefWidth="115.0" text="Vaciar Form" />
    </children>
 </AnchorPane>
