@@ -13,6 +13,7 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.aldairgonzalez.controller.FormCargosController;
 import org.aldairgonzalez.controller.FormClientesController;
 import org.aldairgonzalez.controller.MenuCargosController;
 import org.aldairgonzalez.controller.MenuClientesController;
@@ -98,6 +99,17 @@ public class Main extends Application {
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
+    }
+    
+    public void formCargoView(int op){
+        try{
+            FormCargosController formCargosView = (FormCargosController)switchScene("FormCargosView.fxml",450,600);
+            formCargosView.setOp(op);
+            formCargosView.setStage(this);
+        }catch(Exception e){
+             System.out.println(e.getMessage());
+        }
+        
     }
     
     /**

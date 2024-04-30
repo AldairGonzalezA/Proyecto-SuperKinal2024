@@ -31,14 +31,14 @@
         </rowConstraints>
          <children>
             <TextField fx:id="tfNombre" promptText="Nombre" GridPane.rowIndex="1" />
-            <TextField fx:id="tfClienteId" promptText="ClienteId" />
+            <TextField fx:id="tfClienteId" editable="false" promptText="ClienteId" />
             <TextField fx:id="tfApellido" promptText="Apellido" GridPane.rowIndex="2" />
             <TextField fx:id="tfTelefono" promptText="Telefono" GridPane.rowIndex="3" />
             <TextField fx:id="tfDireccion" promptText="Direccion" GridPane.rowIndex="4" />
             <TextField fx:id="tfNit" promptText="Nit" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <Button fx:id="btnAgregar" layoutX="309.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="85.0" text="Agregar" />
+      <Button fx:id="btnAgregar" layoutX="309.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="85.0" text="Guardar" />
       <Button fx:id="btnRegresar" layoutX="56.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="85.0" text="Regresar" />
    </children>
 </AnchorPane>

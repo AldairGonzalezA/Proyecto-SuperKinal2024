@@ -14,12 +14,15 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.aldairgonzalez.dao.Conexion;
+import org.aldairgonzalez.dto.CargoDTO;
 import org.aldairgonzalez.model.Cargo;
 import org.aldairgonzalez.system.Main;
 
@@ -39,6 +42,8 @@ public class MenuCargosController implements Initializable {
     TableView tblCargos;
     @FXML
     TableColumn colCargoId, colCargo, colDescripcion;
+    @FXML
+    Button btnAgregar, btnEditar;
     /**
      * Initializes the controller class.
      */
@@ -47,7 +52,14 @@ public class MenuCargosController implements Initializable {
         cargarListaCargos();
     }    
 
-    
+    public void handleButtonAction(ActionEvent event){
+        if(event.getSource() == btnAgregar){
+            stage.formCargoView(1);
+        } else if(event.getSource() == btnEditar){
+             CargoDTO.getCargoDTO().setCargo((Cargo)tblCargos.getSelectionModel().getSelectedItem());
+             stage.formCargoView(2);
+        }
+    }
     
     public void cargarListaCargos(){
         tblCargos.setItems(listarCargos());
