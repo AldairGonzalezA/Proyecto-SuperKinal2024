@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.aldairgonzalez.dao.Conexion;
 import org.aldairgonzalez.dto.CargoDTO;
@@ -44,6 +45,8 @@ public class MenuCargosController implements Initializable {
     TableColumn colCargoId, colCargo, colDescripcion;
     @FXML
     Button btnAgregar, btnEditar;
+    @FXML
+    TextField tfCargoId;
     /**
      * Initializes the controller class.
      */
@@ -102,6 +105,43 @@ public class MenuCargosController implements Initializable {
             }
         }
         return FXCollections.observableList(cargos);
+    }
+    
+    public void eliminarCargos(int cargoId){
+        try{
+            conexion = Conexion.getInstance().obtenerConexion();
+            String sql = "call sp_eliminarCargos(?)";
+            statement = conexion.prepareStatement(sql);
+            statement.setInt(1, cargoId);
+            statement.execute();
+        }catch(SQLException e){
+             System.out.println(e.getMessage());
+        }finally{
+            try{
+                if(statement != null){
+                    statement.close();
+                }
+                if(conexion != null){
+                    conexion.close();
+                }
+            }catch(SQLException e ){
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+    
+    public Cargo buscarCargo(){
+        Cargo cargo = null;
+        try{
+            conexion = Conexion.getInstance().obtenerConexion();
+            String sql = "call sp_BuscarCargo(?)";
+            statement = conexion.prepareStatement(sql);
+            statement.setInt(1, Integer.parseInt(tfCargoId.getText()));
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        
+        return cargo;
     }
     
     public Main getStage() {
