@@ -140,7 +140,8 @@ public class MenuCargosController implements Initializable {
             resultSet = statement.executeQuery();
             
             if(resultSet.next()){
-                
+                int cargoId = resultSet.getInt("cargoId");
+                String nombre = 
             }
         }catch(SQLException e){
             System.out.println(e.getMessage());
