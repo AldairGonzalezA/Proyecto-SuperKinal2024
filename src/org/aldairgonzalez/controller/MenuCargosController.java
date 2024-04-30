@@ -137,6 +137,11 @@ public class MenuCargosController implements Initializable {
             String sql = "call sp_BuscarCargo(?)";
             statement = conexion.prepareStatement(sql);
             statement.setInt(1, Integer.parseInt(tfCargoId.getText()));
+            resultSet = statement.executeQuery();
+            
+            if(resultSet.next()){
+                
+            }
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
