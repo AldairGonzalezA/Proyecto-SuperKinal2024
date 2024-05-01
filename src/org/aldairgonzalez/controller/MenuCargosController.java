@@ -44,7 +44,7 @@ public class MenuCargosController implements Initializable {
     @FXML
     TableColumn colCargoId, colCargo, colDescripcion;
     @FXML
-    Button btnAgregar, btnEditar;
+    Button btnAgregar, btnEditar, btnEliminar, btnBuscar, btnRegresar;
     @FXML
     TextField tfCargoId;
     /**
@@ -61,6 +61,22 @@ public class MenuCargosController implements Initializable {
         } else if(event.getSource() == btnEditar){
              CargoDTO.getCargoDTO().setCargo((Cargo)tblCargos.getSelectionModel().getSelectedItem());
              stage.formCargoView(2);
+        } else if(event.getSource() == btnEliminar){
+            int carId = ((Cargo)tblCargos.getSelectionModel().getSelectedItem()).getCargoId();
+            eliminarCargos(carId);
+            cargarListaCargos();
+        } else if(event.getSource() == btnBuscar){
+            tblCargos.getItems().clear();
+            if(tfCargoId.getText().equals("")){
+                cargarListaCargos();
+            }else {
+                tblCargos.getItems().add(buscarCargo());
+                colCargoId.setCellValueFactory(new PropertyValueFactory<Cargo,Integer>("cargoId"));
+                colCargo.setCellValueFactory(new PropertyValueFactory<Cargo, String>("nombreCargo"));
+                colDescripcion.setCellValueFactory(new PropertyValueFactory<Cargo, String>("descripcion"));
+            }
+        } else if(event.getSource() == btnRegresar){
+            stage.menuPrincipalView();
         }
     }
     
@@ -110,7 +126,7 @@ public class MenuCargosController implements Initializable {
     public void eliminarCargos(int cargoId){
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_eliminarCargos(?)";
+            String sql = "call sp_eliminarCargo(?)";
             statement = conexion.prepareStatement(sql);
             statement.setInt(1, cargoId);
             statement.execute();
@@ -134,17 +150,34 @@ public class MenuCargosController implements Initializable {
         Cargo cargo = null;
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_BuscarCargo(?)";
+            String sql = "call sp_buscarCargo(?)";
             statement = conexion.prepareStatement(sql);
             statement.setInt(1, Integer.parseInt(tfCargoId.getText()));
             resultSet = statement.executeQuery();
             
             if(resultSet.next()){
                 int cargoId = resultSet.getInt("cargoId");
-                String nombre = 
+                String nombre = resultSet.getString("nombreCargo");
+                String descripcion = resultSet.getString("descripcionCargo");
+                
+                cargo = (new Cargo(cargoId,nombre,descripcion));
             }
         }catch(SQLException e){
             System.out.println(e.getMessage());
+        }finally{
+            try{
+                if(statement != null){
+                    statement.close();
+                }
+                if(resultSet != null){
+                    resultSet.close();
+                }
+                if(conexion != null){
+                    conexion.close();
+                }
+            }catch(SQLException e){
+              System.out.println(e.getMessage());
+            }
         }
         
         return cargo;

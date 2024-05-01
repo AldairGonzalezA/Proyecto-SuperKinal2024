@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class Conexion {
     private static Conexion instance;
     private String url = "jdbc:mysql://localhost:3306/DBSuperKinal?serverTimezone=GMT-6&USEssl=false";
-    private String user = "aldairGonzalez";
+    private String user = "IN4CV";
     private String password = "1234";
     
     private Conexion(){
