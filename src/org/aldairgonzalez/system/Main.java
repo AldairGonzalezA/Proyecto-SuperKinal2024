@@ -15,8 +15,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.aldairgonzalez.controller.FormCargosController;
 import org.aldairgonzalez.controller.FormClientesController;
+import org.aldairgonzalez.controller.FormComprasController;
 import org.aldairgonzalez.controller.MenuCargosController;
 import org.aldairgonzalez.controller.MenuClientesController;
+import org.aldairgonzalez.controller.MenuComprasController;
 import org.aldairgonzalez.controller.MenuPrincipalController;
 import org.aldairgonzalez.controller.MenuTicketSoporteController;
 
@@ -112,6 +114,24 @@ public class Main extends Application {
         
     }
     
+    public void MenuComprasView(){
+        try{
+            MenuComprasController menuComprasView = (MenuComprasController)switchScene("MenuComprasView.fxml",1200,650);
+            menuComprasView.setStage(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void FormCompraView(int op){
+        try{
+            FormComprasController formComprasView = (FormComprasController)switchScene("FormComprasView.fxml", 450,600);
+            formComprasView.setOp(op);
+            formComprasView.setStage(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
     /**
      * @param args the command line arguments
      */
