@@ -12,15 +12,15 @@ package org.aldairgonzalez.model;
 public class CategoriaProducto {
     private int categoriaProductoId;
     private String nombreCategoria;
-    private String descripcionCaategoria;
+    private String descrippcionCategoria;
 
     public CategoriaProducto() {
     }
 
-    public CategoriaProducto(int categoriaProductoId, String nombreCategoria, String descripcionCaategoria) {
+    public CategoriaProducto(int categoriaProductoId, String nombreCategoria, String descrippcionCategoria) {
         this.categoriaProductoId = categoriaProductoId;
         this.nombreCategoria = nombreCategoria;
-        this.descripcionCaategoria = descripcionCaategoria;
+        this.descrippcionCategoria = descrippcionCategoria;
     }
 
     public int getCategoriaProductoId() {
@@ -39,17 +39,17 @@ public class CategoriaProducto {
         this.nombreCategoria = nombreCategoria;
     }
 
-    public String getDescripcionCaategoria() {
-        return descripcionCaategoria;
+    public String getDescrippcionCategoria() {
+        return descrippcionCategoria;
     }
 
-    public void setDescripcionCaategoria(String descripcionCaategoria) {
-        this.descripcionCaategoria = descripcionCaategoria;
+    public void setDescrippcionCategoria(String descrippcionCategoria) {
+        this.descrippcionCategoria = descrippcionCategoria;
     }
 
     @Override
     public String toString() {
-        return "CategoriaProducto{" + "categoriaProductoId=" + categoriaProductoId + ", nombreCategoria=" + nombreCategoria + ", descripcionCaategoria=" + descripcionCaategoria + '}';
+        return "CategoriaProducto{" + "categoriaProductoId=" + categoriaProductoId + ", nombreCategoria=" + nombreCategoria + ", descripcionCaategoria=" + descrippcionCategoria + '}';
     }
     
     

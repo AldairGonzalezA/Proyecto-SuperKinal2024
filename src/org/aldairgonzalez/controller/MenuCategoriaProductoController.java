@@ -14,12 +14,14 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import org.aldairgonzalez.system.Main;
 import javafx.scene.control.Button;
+import javafx.scene.control.cell.PropertyValueFactory;
 import org.aldairgonzalez.dao.Conexion;
 import org.aldairgonzalez.model.CategoriaProducto;
 
@@ -40,17 +42,27 @@ public class MenuCategoriaProductoController implements Initializable {
     @FXML
     TableColumn colCategoriaId, colNombreCategoria, colDescripcion;
     @FXML
-    Button btnAgregar, btnEditar, btnBuscar, btnElimnar;
+    Button btnAgregar, btnEditar, btnBuscar, btnElimnar, btnRegresar;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+       cargarListaCategorias();
     }    
 
     public void cargarListaCategorias(){
         tblCategorias.setItems(listarCategorias());
+        colCategoriaId.setCellValueFactory(new PropertyValueFactory<CategoriaProducto, Integer>("categoriaProductoId"));
+        colNombreCategoria.setCellValueFactory(new PropertyValueFactory<CategoriaProducto, String>("nombreCategoria"));
+        colDescripcion.setCellValueFactory(new PropertyValueFactory<CategoriaProducto,String>("descrippcionCategoria"));
+    }
+    
+    @FXML
+    public void handleButtonAction(ActionEvent event){
+        if(event.getSource() == btnRegresar){
+            stage.menuPrincipalView();
+        }
     }
     
     public ObservableList<CategoriaProducto> listarCategorias(){
@@ -65,7 +77,7 @@ public class MenuCategoriaProductoController implements Initializable {
             while(resultSet.next()){
                 int categoriaId = resultSet.getInt("categoriaProductoId");
                 String nombre = resultSet.getString("nombreCategoria");
-                String descripcion = resultSet.getString("descripcionCategoria");
+                String descripcion = resultSet.getString("descrippcionCategoria");
                 
                 categorias.add(new CategoriaProducto(categoriaId,nombre,descripcion));
             }

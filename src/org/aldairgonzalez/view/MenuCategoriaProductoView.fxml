@@ -9,19 +9,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1200.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="org.aldairgonzalez.controller.MenuCategoriaProductoController">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.aldairgonzalez.controller.MenuCategoriaProductoController">
    <children>
       <ImageView fitHeight="650.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/Menu%20Categoria%20Producto.png" />
          </image>
       </ImageView>
-      <TableView layoutX="410.0" layoutY="208.0" prefHeight="422.0" prefWidth="753.0">
+      <TableView fx:id="tblCategorias" layoutX="410.0" layoutY="208.0" prefHeight="422.0" prefWidth="753.0">
         <columns>
           <TableColumn fx:id="colCategoriaId" prefWidth="182.66665649414062" text="Categoria Producto Id" />
-          <TableColumn fx:id="colNombreCategoria" prefWidth="380.66668701171875" text="Nombre de la Categoria" />
-            <TableColumn fx:id="colDescripcion" prefWidth="188.6666259765625" text="Descripcion " />
+          <TableColumn fx:id="colNombreCategoria" prefWidth="262.0" text="Nombre de la Categoria" />
+            <TableColumn fx:id="colDescripcion" prefWidth="308.0" text="Descripcion " />
         </columns>
       </TableView>
       <Button fx:id="btnAgregar" layoutX="82.0" layoutY="222.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="220.0" style="-fx-background-color: #012030; -fx-border-width: 2; -fx-background-radius: 10;" text="Agregar" textFill="#fefefe">

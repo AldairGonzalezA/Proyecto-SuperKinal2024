@@ -149,11 +149,11 @@ DELIMITER ;
 DELIMITER $$
 create procedure sp_agregarCategoriaProductos(nomCat varchar(30),desCat varchar(100))
 begin 
-	insert into CategoriaProductos(nombreCategoria,descripcionCategoria) values
+	insert into CategoriaProductos(nombreCategoria,descrippcionCategoria) values
 		(nomCat,desCat);
 end$$
 DELIMITER ;
- 
+ call sp_agregarCategoriaProductos('Fruta', 'Alimento Frutal');
 DELIMITER $$
 create procedure sp_listarCategoriaProductos()
 begin
