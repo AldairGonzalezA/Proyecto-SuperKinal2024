@@ -17,6 +17,7 @@ import org.aldairgonzalez.controller.FormCargosController;
 import org.aldairgonzalez.controller.FormClientesController;
 import org.aldairgonzalez.controller.FormComprasController;
 import org.aldairgonzalez.controller.MenuCargosController;
+import org.aldairgonzalez.controller.MenuCategoriaProductoController;
 import org.aldairgonzalez.controller.MenuClientesController;
 import org.aldairgonzalez.controller.MenuComprasController;
 import org.aldairgonzalez.controller.MenuPrincipalController;
@@ -131,6 +132,15 @@ public class Main extends Application {
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
+    }
+    
+    public void MenuCategoriaProductoView(){
+       try{
+            MenuCategoriaProductoController menuCategoriaProductoView = (MenuCategoriaProductoController)switchScene("MenuCategoriaProductoView.fxml", 1200, 650);
+            menuCategoriaProductoView.setStage(this);
+       }catch(Exception e){
+           System.out.println(e.getMessage());
+       }
     }
     /**
      * @param args the command line arguments
