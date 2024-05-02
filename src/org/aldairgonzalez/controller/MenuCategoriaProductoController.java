@@ -21,8 +21,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import org.aldairgonzalez.system.Main;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.aldairgonzalez.dao.Conexion;
+import org.aldairgonzalez.dto.CategoriaProductoDTO;
 import org.aldairgonzalez.model.CategoriaProducto;
 
 /**
@@ -43,6 +45,8 @@ public class MenuCategoriaProductoController implements Initializable {
     TableColumn colCategoriaId, colNombreCategoria, colDescripcion;
     @FXML
     Button btnAgregar, btnEditar, btnBuscar, btnElimnar, btnRegresar;
+    @FXML
+    TextField tfCategoriaId;
     /**
      * Initializes the controller class.
      */
@@ -62,6 +66,22 @@ public class MenuCategoriaProductoController implements Initializable {
     public void handleButtonAction(ActionEvent event){
         if(event.getSource() == btnRegresar){
             stage.menuPrincipalView();
+        } else if(event.getSource() == btnElimnar){
+            int cateId = ((CategoriaProducto)tblCategorias.getSelectionModel().getSelectedItem()).getCategoriaProductoId();
+            eliminarCategoria(cateId);
+        } else if(event.getSource() == btnEditar){
+            CategoriaProductoDTO.getCategoriaProductoDTO().setCategoriaProducto((CategoriaProducto)tblCategorias.getSelectionModel().getSelectedItem());
+            
+        }else if(event.getSource() == btnBuscar){
+            tblCategorias.getItems().clear();
+            if(tfCategoriaId.getText().equals("")){
+                cargarListaCategorias();
+            } else {
+                tblCategorias.getItems().add(buscarCategoria());
+                colCategoriaId.setCellValueFactory(new PropertyValueFactory<CategoriaProducto, Integer>("categoriaProductoId"));
+                colNombreCategoria.setCellValueFactory(new PropertyValueFactory<CategoriaProducto, String>("nombreCategoria"));
+                colDescripcion.setCellValueFactory(new PropertyValueFactory<CategoriaProducto,String>("descrippcionCategoria"));
+            }
         }
     }
     
@@ -100,6 +120,54 @@ public class MenuCategoriaProductoController implements Initializable {
         }
         
         return FXCollections.observableList(categorias);
+    }
+    
+    public void eliminarCategoria(int cateId){
+        try{
+            conexion = Conexion.getInstance().obtenerConexion();
+            String sql = "call sp_eliminarCategoriaProductos(?)";
+            statement = conexion.prepareStatement(sql);
+            statement.setInt(1, cateId);
+            statement.execute();
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }finally{
+             try{
+                if(statement != null){
+                    statement.close();
+                }
+                if(conexion != null){
+                    conexion.close();
+                }
+            }catch(SQLException e ){
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+    
+    public CategoriaProducto buscarCategoria(){
+        CategoriaProducto categorias = null;
+        
+        try{
+            conexion = Conexion.getInstance().obtenerConexion();
+            String sql = "call sp_buscarCategoriaProductos(?)";
+            statement = conexion.prepareStatement(sql);
+            statement.setInt(1, Integer.parseInt(tfCategoriaId.getText()));
+            resultSet = statement.executeQuery();
+            
+            if(resultSet.next()){
+                int categoriaId = resultSet.getInt("categoriaProductoId");
+                String nombre = resultSet.getString("nombreCategoria");
+                String descripcion = resultSet.getString("descrippcionCategoria");
+                
+                categorias = (new CategoriaProducto(categoriaId,nombre,descripcion));
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }finally{
+            
+        }
+        return categorias;
     }
     
     public Main getStage() {

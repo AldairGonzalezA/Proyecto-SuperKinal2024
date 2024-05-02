@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.aldairgonzalez.controller.FormCargosController;
+import org.aldairgonzalez.controller.FormCategoriasProductoController;
 import org.aldairgonzalez.controller.FormClientesController;
 import org.aldairgonzalez.controller.FormComprasController;
 import org.aldairgonzalez.controller.MenuCargosController;
@@ -138,6 +139,17 @@ public class Main extends Application {
        try{
             MenuCategoriaProductoController menuCategoriaProductoView = (MenuCategoriaProductoController)switchScene("MenuCategoriaProductoView.fxml", 1200, 650);
             menuCategoriaProductoView.setStage(this);
+       }catch(Exception e){
+           System.out.println(e.getMessage());
+       }
+    }
+    
+    public void formCategoriasProductoView(int op){
+       try{
+            FormCategoriasProductoController formCategoriasProductosView = (FormCategoriasProductoController)switchScene("FormCategoriasProductosView.fxml",450,600);
+            formCategoriasProductosView.setOp(op);
+            formCategoriasProductosView.setStage(this);
+            
        }catch(Exception e){
            System.out.println(e.getMessage());
        }

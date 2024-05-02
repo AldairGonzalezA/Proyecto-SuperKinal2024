@@ -160,7 +160,7 @@ begin
 	select * from CategoriaProductos;
 end$$
 DELIMITER ;
- 
+  call sp_listarCategoriaProductos();
 DELIMITER $$
 create procedure sp_buscarCategoriaProductos(catProId int)
 begin
