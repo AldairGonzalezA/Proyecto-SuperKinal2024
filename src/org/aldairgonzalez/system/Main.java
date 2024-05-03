@@ -17,10 +17,12 @@ import org.aldairgonzalez.controller.FormCargosController;
 import org.aldairgonzalez.controller.FormCategoriasProductoController;
 import org.aldairgonzalez.controller.FormClientesController;
 import org.aldairgonzalez.controller.FormComprasController;
+import org.aldairgonzalez.controller.FormDistribuidoresController;
 import org.aldairgonzalez.controller.MenuCargosController;
 import org.aldairgonzalez.controller.MenuCategoriaProductoController;
 import org.aldairgonzalez.controller.MenuClientesController;
 import org.aldairgonzalez.controller.MenuComprasController;
+import org.aldairgonzalez.controller.MenuDistribuidoresController;
 import org.aldairgonzalez.controller.MenuPrincipalController;
 import org.aldairgonzalez.controller.MenuTicketSoporteController;
 
@@ -146,13 +148,32 @@ public class Main extends Application {
     
     public void formCategoriasProductoView(int op){
        try{
-            FormCategoriasProductoController formCategoriasProductosView = (FormCategoriasProductoController)switchScene("FormCategoriasProductosView.fxml",450,600);
+            FormCategoriasProductoController formCategoriasProductosView = (FormCategoriasProductoController)switchScene("FormCategoriasProductoView.fxml",450,600);
             formCategoriasProductosView.setOp(op);
             formCategoriasProductosView.setStage(this);
             
        }catch(Exception e){
            System.out.println(e.getMessage());
        }
+    }
+    
+    public void menuDistribuidoresView(){
+        try{
+            MenuDistribuidoresController menuDistribuidoresView = (MenuDistribuidoresController)switchScene("MenuDistribuidoresView.fxml",1200,650);
+            menuDistribuidoresView.setStage(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void formDistribuidorView(int op){
+        try{
+            FormDistribuidoresController formDistribuidoresView = (FormDistribuidoresController)switchScene("FormDistribuidoresView.fxml",450,600);
+            formDistribuidoresView.setOp(op);
+            formDistribuidoresView.setStage(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
     /**
      * @param args the command line arguments

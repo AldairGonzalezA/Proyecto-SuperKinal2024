@@ -28,4 +28,10 @@ public class DistribuidorDTO {
     public Distribuidor getDistribuidor(){
         return distribuidor;
     }
+
+    public void setDistribuidor(Distribuidor distribuidor) {
+        this.distribuidor = distribuidor;
+    }
+    
+    
 }
