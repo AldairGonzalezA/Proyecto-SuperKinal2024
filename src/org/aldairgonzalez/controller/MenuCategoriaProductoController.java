@@ -82,6 +82,12 @@ public class MenuCategoriaProductoController implements Initializable {
                 colNombreCategoria.setCellValueFactory(new PropertyValueFactory<CategoriaProducto, String>("nombreCategoria"));
                 colDescripcion.setCellValueFactory(new PropertyValueFactory<CategoriaProducto,String>("descrippcionCategoria"));
             }
+        } else if(event.getSource() == btnAgregar){
+            stage.formCategoriasProductoView(1);
+            
+        } else if(event.getSource() == btnEditar){
+            CategoriaProductoDTO.getCategoriaProductoDTO().setCategoriaProducto((CategoriaProducto)tblCategorias.getSelectionModel().getSelectedItem());
+            stage.formCategoriasProductoView(2);
         }
     }
     
