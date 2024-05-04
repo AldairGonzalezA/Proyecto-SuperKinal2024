@@ -23,6 +23,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.aldairgonzalez.dao.Conexion;
+import org.aldairgonzalez.dto.DistribuidorDTO;
 import org.aldairgonzalez.model.Distribuidor;
 import org.aldairgonzalez.system.Main;
 
@@ -59,9 +60,10 @@ public class MenuDistribuidoresController implements Initializable {
         if(event.getSource() == btnRegresar){
           stage.menuPrincipalView();
         }else if(event.getSource() == btnAgregar){
-            
+             stage.formDistribuidorView(1);
         }else if(event.getSource() == btnEditar){
-            
+            DistribuidorDTO.getDistribuidorDTO().setDistribuidor((Distribuidor)tblDistribuidores.getSelectionModel().getSelectedItem());
+            stage.formDistribuidorView(2);
         }else if(event.getSource() == btnEliminar){
             int disId = ((Distribuidor)tblDistribuidores.getSelectionModel().getSelectedItem()).getDistribuidorId();
             eliminarDistribuidor(disId);
@@ -87,7 +89,7 @@ public class MenuDistribuidoresController implements Initializable {
         colDistribuidorId.setCellValueFactory(new PropertyValueFactory<Distribuidor, Integer>("distribuidorId"));
         colNombreDistribuidor.setCellValueFactory(new PropertyValueFactory<Distribuidor, String>("nombreDistribuidor"));
         colDireccionDistribuidor.setCellValueFactory(new PropertyValueFactory<Distribuidor, String>("direccionDistribuidor"));
-        colNitDistribuidor.setCellValueFactory(new PropertyValueFactory<Distribuidor, String>("nirDistribuidor"));
+        colNitDistribuidor.setCellValueFactory(new PropertyValueFactory<Distribuidor, String>("nitDistribuidor"));
         colTelefonoDistribuidor.setCellValueFactory(new PropertyValueFactory<Distribuidor, String>("telefonoDistribuidor"));
         colWeb.setCellValueFactory(new PropertyValueFactory<Distribuidor, String>("web"));
     }

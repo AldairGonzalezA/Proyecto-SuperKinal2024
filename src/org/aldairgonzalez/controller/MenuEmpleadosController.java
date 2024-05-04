@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -18,6 +20,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
 import org.aldairgonzalez.dao.Conexion;
 import org.aldairgonzalez.model.Empleado;
 import org.aldairgonzalez.system.Main;
@@ -33,6 +36,9 @@ public class MenuEmpleadosController implements Initializable {
     private static Connection conexion = null;
     private static PreparedStatement statement = null;
     private static ResultSet resultSet = null;
+    
+    @FXML
+    TextField tfNombreEmpleado,tfApellido,tfSueldo,tfHoraEntrada,tfHoraSalida; 
     /**
      * Initializes the controller class.
      */
@@ -92,17 +98,39 @@ public class MenuEmpleadosController implements Initializable {
     }
     
     public void agregarEmpleados(){
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        Time horaEntrada = null;
+        Time horaSalida = null;
+        try{
+            horaEntrada = new Time(sdf.parse(tfHoraEntrada.getText()).getTime());
+            horaSalida = new Time(sdf.parse(tfHoraSalida.getText()).getTime());
+        }catch(ParseException e){
+             e.printStackTrace();
+        }
+        
+        
         try{
             conexion = Conexion.getInstance().obtenerConexion();
             String sql = "call sp_agregarEmpleados(?,?,?,?,?,?,?,?)";
             statement = conexion.prepareStatement(sql);
             statement.setString(1, tfNombreEmpleado.getText());
             statement.setString(2, tfApellido.getText());
-            statement.setDouble(3, tfSueldo.getText());
-            statement.setTime(4, tfHoraEntrada.getText());
-            statement.setTime(5, tfHoraSalida.getText());
+            statement.setDouble(3, Double.parseDouble(tfSueldo.getText()));
+            statement.setTime(4, horaEntrada);
+            statement.setTime(5, horaSalida);
         }catch(SQLException e){
             System.out.println(e.getMessage());
+        }finally{
+            try{
+                if(statement != null){
+                    statement.close();
+                }
+                if(conexion != null){
+                    conexion.close();
+                }
+            }catch(SQLException e){
+                System.out.println(e.getMessage());
+            }
         }
     }
 }
