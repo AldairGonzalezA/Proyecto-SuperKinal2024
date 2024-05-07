@@ -121,7 +121,7 @@ create table DetalleFactura (
     productoId int not null,
     primary key PK_detalleFacturaId (detalleFacturaId),
     constraint FK_DetalleFactura_Facturas foreign key (facturaId)
-		references Facturas (facturaId),
+		references Facturas (facturaId),. 
 	constraint FK_DetalleFactura_Productos foreign key (productoId)
 		references Productos (productoId)
 );

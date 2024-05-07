@@ -64,11 +64,11 @@ DELIMITER ;
 DELIMITER $$
 create procedure sp_agregarCargo(nomCar varchar(30), desCar varchar(100)) 
 begin
-		insert into Cargos(nomC,desCar) values
-        (nombreCargo, descripcionCargo);
+		insert into Cargos(nombreCargo, descripcionCargo) values
+        (nomCar,desCar);
 end$$
-DELIMITER ;nombreCargo, descripcionCargo
- call sp_agregarCargo('Prueba', 'Prueba');
+DELIMITER ;
+ call sp_agregarCargo('Gerente', 'Supervisa a los empleados');
 DELIMITER $$
 create procedure sp_listarCargos()
 begin 
@@ -241,7 +241,7 @@ create procedure sp_agregarEmpleados(in nomEmp varchar(30),in apeEmp varchar(30)
 			(nomEmp, apeEmp, sue, hoEn, hoSa, carid, encarId);
     end $$
 DELIMITER ;
- call sp_agregarEmpleados('Pedro', 'Navaja', 250.00, 0800, 1700, null, null);
+ call sp_agregarEmpleados('Pedro', 'Navaja', 250.00, 0800, 1700, 1, null);
 
 DELIMITER $$
 create procedure sp_listarEmpleados()
@@ -249,7 +249,7 @@ create procedure sp_listarEmpleados()
 		select * from Empleados;
     end $$
 DELIMITER ;
- 
+ call sp_listarEmpleados();
 DELIMITER $$
 create procedure sp_buscarEmpleados(in empId int)
 	begin

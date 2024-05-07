@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1200.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="org.aldairgonzalez.controller.MenuDetalleFacturaController">
+   <children>
+      <ImageView fitHeight="650.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true" />
+      <TableView layoutX="376.0" layoutY="225.0" prefHeight="405.0" prefWidth="810.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Factura ID" />
+          <TableColumn prefWidth="75.0" text="Fecha" />
+            <TableColumn prefWidth="75.0" text="Hora " />
+            <TableColumn prefWidth="75.0" text="Total" />
+            <TableColumn prefWidth="75.0" text="Cliente" />
+            <TableColumn prefWidth="75.0" text="Producto" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

@@ -59,6 +59,7 @@ public class MenuEmpleadosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cmbCargo.setItems(listarCargos());
+        cmbEncargado.setItems(listarEmpleados());
         cargarDatos();
     }    
     
