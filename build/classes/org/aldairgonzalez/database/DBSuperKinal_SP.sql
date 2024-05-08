@@ -67,7 +67,7 @@ begin
 		insert into Cargos(nombreCargo, descripcionCargo) values
         (nomCar,desCar);
 end$$
-DELIMITER ;nombreCargo, descripcionCargo
+DELIMITER ;
  call sp_agregarCargo('Gerente', 'Supervisa a los empleados');
 DELIMITER $$
 create procedure sp_listarCargos()

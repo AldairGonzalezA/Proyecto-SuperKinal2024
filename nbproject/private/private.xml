@@ -3,9 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/informatica/Desktop/Programas%20GitHub/Proyecto-SuperKinal2024/src/org/aldairgonzalez/controller/MenuTicketSoporteController.java</file>
-            <file>file:/C:/Users/informatica/Desktop/Programas%20GitHub/Proyecto-SuperKinal2024/src/org/aldairgonzalez/controller/MenuDetalleFacturaController.java</file>
-            <file>file:/C:/Users/informatica/Desktop/Programas%20GitHub/Proyecto-SuperKinal2024/src/org/aldairgonzalez/controller/MenuProductosController.java</file>
+            <file>file:/C:/Users/Compu%20Fire/OneDrive/Escritorio/Proyectos%20GIPHUB/Proyecto-SuperKinal2024/src/org/aldairgonzalez/controller/MenuFacturasController.java</file>
+            <file>file:/C:/Users/Compu%20Fire/OneDrive/Escritorio/Proyectos%20GIPHUB/Proyecto-SuperKinal2024/src/org/aldairgonzalez/controller/MenuTicketSoporteController.java</file>
+            <file>file:/C:/Users/Compu%20Fire/OneDrive/Escritorio/Proyectos%20GIPHUB/Proyecto-SuperKinal2024/src/org/aldairgonzalez/controller/MenuEmpleadosController.java</file>
+            <file>file:/C:/Users/Compu%20Fire/OneDrive/Escritorio/Proyectos%20GIPHUB/Proyecto-SuperKinal2024/src/org/aldairgonzalez/controller/MenuPrincipalController.java</file>
+            <file>file:/C:/Users/Compu%20Fire/OneDrive/Escritorio/Proyectos%20GIPHUB/Proyecto-SuperKinal2024/src/org/aldairgonzalez/system/Main.java</file>
+            <file>file:/C:/Users/Compu%20Fire/OneDrive/Escritorio/Proyectos%20GIPHUB/Proyecto-SuperKinal2024/src/org/aldairgonzalez/model/TicketSoporte.java</file>
+            <file>file:/C:/Users/Compu%20Fire/OneDrive/Escritorio/Proyectos%20GIPHUB/Proyecto-SuperKinal2024/src/org/aldairgonzalez/controller/MenuCategoriaProductoController.java</file>
+            <file>file:/C:/Users/Compu%20Fire/OneDrive/Escritorio/Proyectos%20GIPHUB/Proyecto-SuperKinal2024/src/org/aldairgonzalez/controller/MenuDistribuidoresController.java</file>
+            <file>file:/C:/Users/Compu%20Fire/OneDrive/Escritorio/Proyectos%20GIPHUB/Proyecto-SuperKinal2024/src/org/aldairgonzalez/controller/MenuProductosController.java</file>
+            <file>file:/C:/Users/Compu%20Fire/OneDrive/Escritorio/Proyectos%20GIPHUB/Proyecto-SuperKinal2024/src/org/aldairgonzalez/controller/MenuComprasController.java</file>
         </group>
     </open-files>
 </project-private>

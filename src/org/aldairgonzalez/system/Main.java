@@ -25,6 +25,7 @@ import org.aldairgonzalez.controller.MenuComprasController;
 import org.aldairgonzalez.controller.MenuDistribuidoresController;
 import org.aldairgonzalez.controller.MenuEmpleadosController;
 import org.aldairgonzalez.controller.MenuPrincipalController;
+import org.aldairgonzalez.controller.MenuProductosController;
 import org.aldairgonzalez.controller.MenuTicketSoporteController;
 
 /**
@@ -181,6 +182,15 @@ public class Main extends Application {
         try{
             MenuEmpleadosController menuEmpleadosView = (MenuEmpleadosController)switchScene("MenuEmpleadosView.fxml", 1200, 650);
             menuEmpleadosView.setStage(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void menuProductosView(){
+        try{
+            MenuProductosController menuProductosView = (MenuProductosController)switchScene("MenuProductosView.fxml",1200,650);
+            menuProductosView.setStage(this);
         }catch(Exception e){
             System.out.println(e.getMessage());
         }

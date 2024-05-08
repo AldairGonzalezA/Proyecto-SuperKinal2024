@@ -49,7 +49,7 @@ public class CategoriaProducto {
 
     @Override
     public String toString() {
-        return "CategoriaProducto{" + "categoriaProductoId=" + categoriaProductoId + ", nombreCategoria=" + nombreCategoria + ", descripcionCaategoria=" + descrippcionCategoria + '}';
+        return "ID: " + categoriaProductoId + " | " + nombreCategoria;
     }
     
     
