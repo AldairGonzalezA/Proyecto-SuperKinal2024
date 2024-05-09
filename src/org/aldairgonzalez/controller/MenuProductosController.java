@@ -81,6 +81,41 @@ public class MenuProductosController implements Initializable {
             stage.menuPrincipalView();
         }else if(event.getSource() == btnVaciar){
             vaciarCampos();
+        }else if(event.getSource() == btnBuscar){
+            tblProductos.getItems().clear();
+            if(tfBuscarProducto.getText().equals("")){
+                cargarDatosProductos();
+            }else{
+                try{
+                    tblProductos.getItems().add(buscarProducto());
+                    colProductoId.setCellValueFactory(new PropertyValueFactory<Producto, Integer>("productoId"));
+                    colNombre.setCellValueFactory(new PropertyValueFactory<Producto, String>("nombreProducto"));
+                    colDescripcion.setCellValueFactory(new PropertyValueFactory<Producto, String>("descripcionProducto"));
+                    colCantidad.setCellValueFactory(new PropertyValueFactory<Producto, Integer>("cantidadStock"));
+                    colPrecioUnitario.setCellValueFactory(new PropertyValueFactory<Producto, Double>("precioVentaUnitario"));
+                    colPrecioMayor.setCellValueFactory(new PropertyValueFactory<Producto, Double>("precioVentaMayor"));
+                    colPrecioCompra.setCellValueFactory(new PropertyValueFactory<Producto, Double>("precioCompra"));
+                    colDistribuidor.setCellValueFactory(new PropertyValueFactory<Producto, String>("distribuidor"));
+                    colCategoria.setCellValueFactory(new PropertyValueFactory<Producto, String>("categoriaProducto"));
+                
+                    Producto producto = buscarImagen();
+                    if(producto != null){
+                        InputStream file = producto.getImagenProducto().getBinaryStream();
+                        Image imagen = new Image(file);
+                        imgMostar.setImage(imagen);
+                    }
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                }
+            }
+        } else if(event.getSource() == btnGuardar){
+            if(tfProductoId.getText().isEmpty()){
+                agregarProducto();
+                cargarDatosProductos();
+            }else {
+                editarProductos();
+                cargarDatosProductos();
+            }
         }
     }
     
@@ -302,10 +337,12 @@ public class MenuProductosController implements Initializable {
             statement.setDouble(4, Double.parseDouble(tfPrecioUnitario.getText()));
             statement.setDouble(5, Double.parseDouble(tfPrecioMayor.getText()));
             statement.setDouble(6, Double.parseDouble(tfPrecioCompra.getText()));
-            InputStream img = new FileInputStream(files.get(0));
-            statement.setBinaryStream(7, img);
-            statement.setInt(8, ((Producto)cmbDistribuidor.getSelectionModel().getSelectedItem()).getDistribuidorId());
-            statement.setInt(9, ((Producto)cmbCategoria.getSelectionModel().getSelectedItem()).getCategoriaProductoId());
+            /*InputStream img = new FileInputStream(files.get(0));
+            statement.setBinaryStream(7, img);*/
+            statement.setInt(8, ((Distribuidor)cmbDistribuidor.getSelectionModel().getSelectedItem()).getDistribuidorId());
+            statement.setInt(9, ((CategoriaProducto)cmbCategoria.getSelectionModel().getSelectedItem()).getCategoriaProductoId());
+            
+            
         }catch(Exception e){
             System.out.println(e.getMessage());
         }finally{
@@ -351,6 +388,84 @@ public class MenuProductosController implements Initializable {
                 System.out.println(e.getMessage());
             }
         }
+    }
+    
+    public Producto buscarProducto(){
+        Producto producto = null;
+        
+        try{
+            conexion = Conexion.getInstance().obtenerConexion();
+            String sql = "call sp_buscarProducto(?)";
+            statement = conexion.prepareStatement(sql);
+            resultSet = statement.executeQuery();
+            
+            if(resultSet.next()){
+                int productoId = resultSet.getInt("productoId");
+                String nombre = resultSet.getString("nombreProducto");
+                String descripcion = resultSet.getString("descripcionProducto");
+                int cantidad = resultSet.getInt("cantidadStock");
+                double unitario = resultSet.getDouble("precioVentaUnitario");
+                double mayor = resultSet.getDouble("precioVentaMayor");
+                double precio = resultSet.getDouble("precioCompra");
+                String distribuidor = resultSet.getString("distribuidor");
+                String categoria = resultSet.getString("categoriaProducto");
+                
+                producto = (new Producto(productoId,nombre,descripcion,cantidad,unitario,mayor,precio,distribuidor,categoria));
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }finally{
+            try{
+                if(statement != null){
+                    statement.close();
+                }
+                if(resultSet != null){
+                    resultSet.close();
+                }
+                if(conexion != null){
+                    conexion.close();
+                }
+            }catch(SQLException e){
+              System.out.println(e.getMessage());
+            }
+        }
+        
+        return producto;
+    }
+    
+    public Producto buscarImagen(){
+        Producto producto = null;
+        
+        try{
+            conexion = Conexion.getInstance().obtenerConexion();
+            String sql = "call sp_buscarImagen(?)";
+            statement = conexion.prepareStatement(sql);
+            resultSet = statement.executeQuery();
+            
+            while(resultSet.next()){
+                Blob imagen = resultSet.getBlob("imagenProducto");
+                
+                producto = (new Producto(imagen));
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }finally{
+            try{
+                if(statement != null){
+                    statement.close();
+                }
+                if(resultSet != null){
+                    resultSet.close();
+                }
+                if(conexion != null){
+                    conexion.close();
+                }
+            }catch(SQLException e){
+              System.out.println(e.getMessage());
+            }
+        }
+        
+        return producto;
     }
     
     public Main getStage() {

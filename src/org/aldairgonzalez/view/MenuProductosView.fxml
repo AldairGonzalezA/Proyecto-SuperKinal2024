@@ -31,7 +31,7 @@
             <TableColumn fx:id="colCategoria" prefWidth="78.6666259765625" text="Categoria" />
         </columns>
       </TableView>
-      <TextField fx:id="tfProductoId" layoutX="36.0" layoutY="211.0" promptText="Producto ID" />
+      <TextField fx:id="tfProductoId" editable="false" layoutX="36.0" layoutY="211.0" promptText="Producto ID" />
       <TextField fx:id="tfNombre" layoutX="211.0" layoutY="211.0" promptText="Nombre" />
       <TextField fx:id="tfCantidad" layoutX="36.0" layoutY="261.0" promptText="Cantidad Disponible" />
       <TextField fx:id="tfPrecioUnitario" layoutX="36.0" layoutY="318.0" promptText="Precio de Venta Unitario" />

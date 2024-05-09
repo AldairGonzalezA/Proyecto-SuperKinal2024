@@ -54,6 +54,24 @@ public class Producto {
         this.categoriaProducto = categoriaProducto;
     }
 
+    public Producto(int productoId, String nombreProducto, String descripcionProducto, int cantidadStock, double precioVentaUnitario, double precioVentaMayor, double precioCompra, String distribuidor, String categoriaProducto) {
+        this.productoId = productoId;
+        this.nombreProducto = nombreProducto;
+        this.descripcionProducto = descripcionProducto;
+        this.cantidadStock = cantidadStock;
+        this.precioVentaUnitario = precioVentaUnitario;
+        this.precioVentaMayor = precioVentaMayor;
+        this.precioCompra = precioCompra;
+        this.distribuidor = distribuidor;
+        this.categoriaProducto = categoriaProducto;
+    }
+
+    public Producto(Blob imagenProducto) {
+        this.imagenProducto = imagenProducto;
+    }
+    
+    
+
     public int getProductoId() {
         return productoId;
     }
