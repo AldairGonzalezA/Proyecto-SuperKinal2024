@@ -173,7 +173,7 @@ public class MenuEmpleadosController implements Initializable {
     }
     
     public void agregarEmpleados(){
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         Time horaEntrada = null;
         Time horaSalida = null;
         try{
