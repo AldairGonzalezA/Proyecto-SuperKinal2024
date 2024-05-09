@@ -337,11 +337,11 @@ public class MenuProductosController implements Initializable {
             statement.setDouble(4, Double.parseDouble(tfPrecioUnitario.getText()));
             statement.setDouble(5, Double.parseDouble(tfPrecioMayor.getText()));
             statement.setDouble(6, Double.parseDouble(tfPrecioCompra.getText()));
-            /*InputStream img = new FileInputStream(files.get(0));
-            statement.setBinaryStream(7, img);*/
+            InputStream img = new FileInputStream(files.get(0));
+            statement.setBinaryStream(7, img);
             statement.setInt(8, ((Distribuidor)cmbDistribuidor.getSelectionModel().getSelectedItem()).getDistribuidorId());
             statement.setInt(9, ((CategoriaProducto)cmbCategoria.getSelectionModel().getSelectedItem()).getCategoriaProductoId());
-            
+            statement.execute();
             
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -374,6 +374,7 @@ public class MenuProductosController implements Initializable {
             statement.setBinaryStream(7, img);
             statement.setInt(8, ((Producto)cmbDistribuidor.getSelectionModel().getSelectedItem()).getDistribuidorId());
             statement.setInt(9, ((Producto)cmbCategoria.getSelectionModel().getSelectedItem()).getCategoriaProductoId());
+            statement.execute();
         }catch(Exception e){
             System.out.println(e.getMessage());
         }finally{

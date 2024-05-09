@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.aldairgonzalez.controller.MenuPromocionesController">
-    
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.aldairgonzalez.controller.MenuPromocionesController">
+   <children>
+      <ImageView fitHeight="650.0" fitWidth="1200.0" layoutX="-14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+      <TableView fx:id="tblPromociones" layoutX="506.0" layoutY="154.0" prefHeight="464.0" prefWidth="665.0">
+        <columns>
+          <TableColumn fx:id="colPromocionId" prefWidth="87.33334350585938" text="Promocion ID" />
+          <TableColumn fx:id="colPrecio" prefWidth="70.0" text="Precio" />
+            <TableColumn fx:id="colDescripcion" prefWidth="87.33331298828125" text="Descripcion" />
+            <TableColumn fx:id="colFechaInicio" prefWidth="110.0" text="Fecha de Inicio" />
+            <TableColumn fx:id="colFechaFinalizacion" prefWidth="134.66668701171875" text="Fecha de Finalizacion" />
+            <TableColumn fx:id="colProducto" prefWidth="177.33331298828125" text="Producto" />
+        </columns>
+      </TableView>
+      <TextField fx:id="tfPromocionId" layoutX="28.0" layoutY="198.0" promptText="Promocion ID" />
+      <TextField fx:id="tfPrecioPromocion" layoutX="28.0" layoutY="246.0" promptText="Precio Promocion" />
+      <DatePicker fx:id="dpFechaInicio" layoutX="28.0" layoutY="299.0" promptText="Fecha de Inicio" />
+      <DatePicker fx:id="dpFechaFinalizacion" layoutX="28.0" layoutY="342.0" promptText="Fecha de Finalizacion" />
+      <ComboBox fx:id="cmbProductos" layoutX="27.0" layoutY="393.0" prefWidth="150.0" promptText="Productos" />
+      <TextArea fx:id="taDescripcion" layoutX="245.0" layoutY="193.0" prefHeight="200.0" prefWidth="200.0" promptText="Descripcion de la Promocion" />
+   </children>
 </AnchorPane>

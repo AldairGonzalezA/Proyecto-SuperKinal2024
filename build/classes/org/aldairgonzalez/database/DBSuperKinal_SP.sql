@@ -391,22 +391,30 @@ DELIMITER ;
 DELIMITER $$
 create procedure sp_listarProducto()
 	begin 
-		select * from Productos;
+		select P.productoId, P.nombreProducto, P.descripcionProducto, P.cantidadStock, P.precioVentaUnitario, P.precioVentaMayor, P.precioCompra, P.imagenProducto,
+        Concat('Id: ', D.distribuidorId, ' | ', D.nombreDistribuidor) as 'Distribuidor',
+        Concat('Id: ', C.categoriaProductoId, ' | ', C.nombreCategoria)as 'CategoriaProducto' from Productos P
+        Join Distribuidores D on P.distribuidorId = D.distribuidorId
+        Join CategoriaProductos C on P.categoriaProductoId = C.categoriaProductoId;
     end $$
 DELIMITER ;
 
 DELIMITER $$
-create procedure sp_agregarProducto(in nom varchar(50),in des varchar(100),in can int, in preU decimal(10,2),in preM decimal(10,2),in preC decimal(10,2), in ima blob, in disId int, in catId int)
+create procedure sp_agregarProducto(in nom varchar(50),in des varchar(100),in can int, in preU decimal(10,2),in preM decimal(10,2),in preC decimal(10,2), in ima longblob, in disId int, in catId int)
 	begin
-		insert into Productos(nombreProducto, descripcionProducto, cantidadStock, precioUnitario, precioVentaMayor, precioCompra, imagenProducto, distribuidorId, categoriaProductosId ) values
+		insert into Productos(nombreProducto, descripcionProducto, cantidadStock, precioVentaUnitario, precioVentaMayor, precioCompra, imagenProducto, distribuidorId, categoriaProductoId ) values
 			(nom, des, can, preU, preM, preC, ima, disId, catId);
 	end $$
 DELIMITER ;
-
+call sp_agregarProducto('Pera', 'asdasdasd', 40, 1.00,2.00,3.00,null,1,1);
 DELIMITER $$
 create procedure sp_buscarProducto(in proId int)
 	begin 
-		select * from Productos
+		select P.productoId, P.nombreProducto, P.descripcionProducto, P.cantidadStock, P.precioVentaUnitario, P.precioVentaMayor, P.precioCompra, P.imagenProducto,
+        Concat('Id: ', D.distribuidorId, ' | ', D.nombreDistribuidor) as 'Distribuidor',
+        Concat('Id: ', C.categoriaProductoId, ' | ', C.nombreCategoria)as 'CategoriaProducto' from Productos P
+        Join Distribuidores D on P.distribuidorId = D.distribuidorId
+        Join CategoriaProductos C on P.categoriaProductoId = C.categoriaProductoId
         where productoId = proId;
     end $$
 DELIMITER ;
@@ -436,6 +444,14 @@ create procedure sp_eliminarProducto(in proId int)
 			where productoId = proId
     end $$
 DELIMITER
+
+DELIMITER $$
+create procedure sp_buscarImagen(in proId int)
+begin
+	select imagenProducto from Productos
+    where productoId = proId;
+end $$
+DELIMITER ;
 
 -- CRUD Promociones
 DELIMITER $$

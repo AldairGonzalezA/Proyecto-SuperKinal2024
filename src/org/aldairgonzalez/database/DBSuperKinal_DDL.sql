@@ -93,7 +93,7 @@ create table Productos (
     precioVentaUnitario decimal(10,2) not null,
     precioVentaMayor decimal(10,2) not null,
     precioCompra decimal(10,2) not null,
-    imagenProducto blob,
+    imagenProducto longblob,
     distribuidorId int not null,
     categoriaProductoId int not null,
     primary key PK_productoId (productoId),
@@ -121,7 +121,7 @@ create table DetalleFactura (
     productoId int not null,
     primary key PK_detalleFacturaId (detalleFacturaId),
     constraint FK_DetalleFactura_Facturas foreign key (facturaId)
-		references Facturas (facturaId),. 
+		references Facturas (facturaId),
 	constraint FK_DetalleFactura_Productos foreign key (productoId)
 		references Productos (productoId)
 );
