@@ -85,8 +85,15 @@ public class MenuProductosController implements Initializable {
             tblProductos.getItems().clear();
             if(tfBuscarProducto.getText().equals("")){
                 cargarDatosProductos();
+                imgMostar.setImage(null);
             }else{
                 try{
+                    Producto producto = buscarImagen();
+                    if(producto != null){
+                        InputStream file = producto.getImagenProducto().getBinaryStream();
+                        Image imagen = new Image(file);
+                        imgMostar.setImage(imagen);
+                    }
                     tblProductos.getItems().add(buscarProducto());
                     colProductoId.setCellValueFactory(new PropertyValueFactory<Producto, Integer>("productoId"));
                     colNombre.setCellValueFactory(new PropertyValueFactory<Producto, String>("nombreProducto"));
@@ -98,12 +105,7 @@ public class MenuProductosController implements Initializable {
                     colDistribuidor.setCellValueFactory(new PropertyValueFactory<Producto, String>("distribuidor"));
                     colCategoria.setCellValueFactory(new PropertyValueFactory<Producto, String>("categoriaProducto"));
                 
-                    Producto producto = buscarImagen();
-                    if(producto != null){
-                        InputStream file = producto.getImagenProducto().getBinaryStream();
-                        Image imagen = new Image(file);
-                        imgMostar.setImage(imagen);
-                    }
+                    
                 }catch(Exception e){
                     System.out.println(e.getMessage());
                 }
@@ -131,6 +133,7 @@ public class MenuProductosController implements Initializable {
         cmbDistribuidor.getSelectionModel().clearSelection();
         cmbCategoria.getSelectionModel().clearSelection();
         imgMostar.setImage(null);
+        imgCargar.setImage(null);
         
     }
     
@@ -181,7 +184,7 @@ public class MenuProductosController implements Initializable {
     
     public int obtenerIndexDistribuidor(){
         int index = 0;
-        for(int i = 0 ; i<= cmbDistribuidor.getItems().size() ; i++){
+        for(int i = 0 ; i < cmbDistribuidor.getItems().size() ; i++){
             String distribuidorCmb = cmbDistribuidor.getItems().get(i).toString();
             String distribuidorTbl = ((Producto)tblProductos.getSelectionModel().getSelectedItem()).getDistribuidor();
             if(distribuidorCmb.equals(distribuidorTbl)){
@@ -194,7 +197,7 @@ public class MenuProductosController implements Initializable {
     
     public int obtenerIndexCategoria(){
         int index = 0;
-        for(int i = 0 ; i <= cmbCategoria.getItems().size() ; i++){
+        for(int i = 0 ; i <  cmbCategoria.getItems().size() ; i++){
          String categoriaCmb = cmbCategoria.getItems().get(i).toString();
          String categoriaTbl = ((Producto)tblProductos.getSelectionModel().getSelectedItem()).getCategoriaProducto();
          if(categoriaCmb.equals(categoriaTbl)){
@@ -364,16 +367,17 @@ public class MenuProductosController implements Initializable {
             conexion = Conexion.getInstance().obtenerConexion();
             String sql = "call sp_editarProducto(?,?,?,?,?,?,?,?,?,?)";
             statement = conexion.prepareStatement(sql);
-            statement.setString(1,tfNombre.getText());
-            statement.setString(2,taDescripcion.getText());
-            statement.setInt(3, Integer.parseInt(tfCantidad.getText()));
-            statement.setDouble(4, Double.parseDouble(tfPrecioUnitario.getText()));
-            statement.setDouble(5, Double.parseDouble(tfPrecioMayor.getText()));
-            statement.setDouble(6, Double.parseDouble(tfPrecioCompra.getText()));
+            statement.setInt(1, Integer.parseInt(tfProductoId.getText()));
+            statement.setString(2,tfNombre.getText());
+            statement.setString(3,taDescripcion.getText());
+            statement.setInt(4, Integer.parseInt(tfCantidad.getText()));
+            statement.setDouble(5, Double.parseDouble(tfPrecioUnitario.getText()));
+            statement.setDouble(6, Double.parseDouble(tfPrecioMayor.getText()));
+            statement.setDouble(7, Double.parseDouble(tfPrecioCompra.getText()));
             InputStream img = new FileInputStream(files.get(0));
-            statement.setBinaryStream(7, img);
-            statement.setInt(8, ((Producto)cmbDistribuidor.getSelectionModel().getSelectedItem()).getDistribuidorId());
-            statement.setInt(9, ((Producto)cmbCategoria.getSelectionModel().getSelectedItem()).getCategoriaProductoId());
+            statement.setBinaryStream(8, img);
+            statement.setInt(9, ((Distribuidor)cmbDistribuidor.getSelectionModel().getSelectedItem()).getDistribuidorId());
+            statement.setInt(10, ((CategoriaProducto)cmbCategoria.getSelectionModel().getSelectedItem()).getCategoriaProductoId());
             statement.execute();
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -398,6 +402,7 @@ public class MenuProductosController implements Initializable {
             conexion = Conexion.getInstance().obtenerConexion();
             String sql = "call sp_buscarProducto(?)";
             statement = conexion.prepareStatement(sql);
+            statement.setInt(1,Integer.parseInt(tfBuscarProducto.getText()));
             resultSet = statement.executeQuery();
             
             if(resultSet.next()){
@@ -441,6 +446,7 @@ public class MenuProductosController implements Initializable {
             conexion = Conexion.getInstance().obtenerConexion();
             String sql = "call sp_buscarImagen(?)";
             statement = conexion.prepareStatement(sql);
+            statement.setInt(1,Integer.parseInt(tfBuscarProducto.getText()));
             resultSet = statement.executeQuery();
             
             while(resultSet.next()){

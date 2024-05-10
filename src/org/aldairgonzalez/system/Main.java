@@ -16,12 +16,11 @@ import javafx.stage.Stage;
 import org.aldairgonzalez.controller.FormCargosController;
 import org.aldairgonzalez.controller.FormCategoriasProductoController;
 import org.aldairgonzalez.controller.FormClientesController;
-import org.aldairgonzalez.controller.FormComprasController;
 import org.aldairgonzalez.controller.FormDistribuidoresController;
 import org.aldairgonzalez.controller.MenuCargosController;
 import org.aldairgonzalez.controller.MenuCategoriaProductoController;
 import org.aldairgonzalez.controller.MenuClientesController;
-import org.aldairgonzalez.controller.MenuComprasController;
+import org.aldairgonzalez.controller.MenuDetalleCompraController;
 import org.aldairgonzalez.controller.MenuDistribuidoresController;
 import org.aldairgonzalez.controller.MenuEmpleadosController;
 import org.aldairgonzalez.controller.MenuPrincipalController;
@@ -121,24 +120,15 @@ public class Main extends Application {
         
     }
     
-    public void MenuComprasView(){
-        try{
-            MenuComprasController menuComprasView = (MenuComprasController)switchScene("MenuComprasView.fxml",1200,650);
-            menuComprasView.setStage(this);
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-    }
-    
-    public void FormCompraView(int op){
-        try{
-            FormComprasController formComprasView = (FormComprasController)switchScene("FormComprasView.fxml", 450,600);
-            formComprasView.setOp(op);
-            formComprasView.setStage(this);
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-    }
+   public void menuDetalleCompraView(){
+      try{
+           MenuDetalleCompraController menuDetalleCompraView = (MenuDetalleCompraController)switchScene("MenuDetalleComprasView.fxml",1200,650);
+           menuDetalleCompraView.setStage(this);
+           
+      }catch(Exception e){
+          System.out.println(e.getMessage());
+      }
+   }
     
     public void MenuCategoriaProductoView(){
        try{
