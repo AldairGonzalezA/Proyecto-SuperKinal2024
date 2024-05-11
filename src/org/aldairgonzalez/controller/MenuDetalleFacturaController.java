@@ -58,7 +58,7 @@ private Main stage;
     @FXML
     TableColumn colFacturaId,colFecha,colHora,colCliente,colProducto,colEmpleado,colTotal;
     @FXML
-    Button btnRegresar, btnGuardar, btnVaciar, btmBuscar; 
+    Button btnRegresar, btnGuardar, btnVaciar, btnBuscar; 
     /**
      * Initializes the controller class.
      */
@@ -81,6 +81,20 @@ private Main stage;
                 agregarDetalleFactura();
                 cargarDatos();
                 vaciarCampos();
+            }
+        } else if(event.getSource() == btnBuscar){
+            tblFacturas.getItems().clear();
+            if(tfBuscarFactura.getText().equals("")){
+                cargarDatos();
+            }else{
+                tblFacturas.getItems().add(buscarFactura());
+                colFacturaId.setCellValueFactory(new PropertyValueFactory<DetalleFactura, Integer>("facturaId"));
+                colFecha.setCellValueFactory(new PropertyValueFactory<DetalleFactura, Date>("fecha"));
+                colHora.setCellValueFactory(new PropertyValueFactory<DetalleFactura, Time>("hora"));
+                colCliente.setCellValueFactory(new PropertyValueFactory<DetalleFactura, String>("cliente"));
+                colProducto.setCellValueFactory(new PropertyValueFactory<DetalleFactura, String>("producto"));
+                colEmpleado.setCellValueFactory(new PropertyValueFactory<DetalleFactura, String>("empleado"));
+                colTotal.setCellValueFactory(new PropertyValueFactory<DetalleFactura, Double>("total"));
             }
         }
     }

@@ -54,6 +54,5 @@
       <Button fx:id="btnRegresar" layoutX="31.0" layoutY="605.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Regresar" />
       <TextField fx:id="tfBuscarFactura" layoutX="376.0" layoutY="189.0" prefHeight="25.0" prefWidth="207.0" promptText="Ingrese el ID de la factura a buscar" />
       <Button fx:id="btnBuscar" layoutX="592.0" layoutY="189.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Button" />
-      <ImageView fitHeight="650.0" fitWidth="1200.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
