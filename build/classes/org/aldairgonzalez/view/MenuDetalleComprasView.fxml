@@ -18,7 +18,7 @@
             <Image url="@../image/MenuComprasView.png" />
          </image>
       </ImageView>
-      <TableView fx:id="tblCompras" layoutX="429.0" layoutY="212.0" prefHeight="409.0" prefWidth="723.0">
+      <TableView fx:id="tblCompras" layoutX="429.0" layoutY="212.0" onMouseClicked="#cargarDatosEditar" prefHeight="409.0" prefWidth="723.0">
         <columns>
           <TableColumn fx:id="colCompraId" prefWidth="162.00006103515625" text="compra ID" />
           <TableColumn fx:id="colFechaCompra" prefWidth="131.33331298828125" text="Fecha de Compra" />
@@ -32,13 +32,14 @@
             <Font name="Comic Sans MS" size="12.0" />
          </font>
       </Button>
-      <TextField fx:id="tfCompraId" layoutX="429.0" layoutY="169.0" prefHeight="25.0" prefWidth="248.0" promptText="Ingrese el ID de la Compra a buscar" />
+      <TextField fx:id="tfBuscarCompra" layoutX="429.0" layoutY="169.0" prefHeight="25.0" prefWidth="248.0" promptText="Ingrese el ID de la Compra a buscar" />
       <Button fx:id="btnBuscar" layoutX="696.0" layoutY="169.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="31.0" text="Button" />
-      <TextField fx:id="tfCompraId" layoutX="29.0" layoutY="194.0" promptText="Compra ID" />
+      <TextField fx:id="tfCompraId" editable="false" layoutX="29.0" layoutY="194.0" promptText="Compra ID" />
       <DatePicker fx:id="dpFechaCompra" layoutX="29.0" layoutY="237.0" promptText="Fecha de Compra" />
       <TextField fx:id="tfCantidad" layoutX="29.0" layoutY="280.0" promptText="Cantidad" />
       <TextField fx:id="tfTotalCompra" editable="false" layoutX="29.0" layoutY="325.0" promptText="Total de Compra" />
       <ComboBox fx:id="cmbProductos" layoutX="28.0" layoutY="370.0" prefWidth="150.0" promptText="Productos" />
       <Button fx:id="btnGuardar" layoutX="90.0" layoutY="420.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="50.0" prefWidth="111.0" text="Guardar" />
+      <Button fx:id="btnVaciar" layoutX="232.0" layoutY="420.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="50.0" prefWidth="111.0" text="Vaciar" />
    </children>
 </AnchorPane>

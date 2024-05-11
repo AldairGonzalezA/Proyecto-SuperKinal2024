@@ -30,6 +30,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.aldairgonzalez.dao.Conexion;
 import org.aldairgonzalez.model.DetalleCompra;
 import org.aldairgonzalez.model.Producto;
+import org.aldairgonzalez.model.Promocion;
 import org.aldairgonzalez.system.Main;
 
 /**
@@ -47,11 +48,11 @@ public class MenuDetalleCompraController implements Initializable {
     @FXML
     TableView tblCompras;
     @FXML
-    Button btnGuardar,btnRegresar,btnEditar,btnEliminar,btnBuscar;
+    Button btnGuardar,btnRegresar,btnEditar,btnEliminar,btnBuscar, btnVaciar;
     @FXML
     TableColumn colCompraId, colFechaCompra, colTotalCompra, colCantidadCompra, colProducto;
     @FXML
-    TextField tfCompraId, tfFechaCompra, tfTotalCompra, tfCantidad;
+    TextField tfCompraId, tfFechaCompra, tfTotalCompra, tfCantidad, tfBuscarCompra;
     @FXML
     DatePicker dpFechaCompra;
     @FXML
@@ -71,8 +72,60 @@ public class MenuDetalleCompraController implements Initializable {
             if(tfCompraId.getText().isEmpty()){
                 agregarCompra();
                 cargarListaCompras();
+            } else {
+                editarCompra();
+                cargarListaCompras();
+            }
+        }else if(event.getSource() == btnRegresar){
+            stage.menuPrincipalView();
+        }else if(event.getSource() == btnBuscar){
+            tblCompras.getItems().clear();
+            if(tfBuscarCompra.getText().equals("")){
+                cargarListaCompras();
+            }else{
+                tblCompras.getItems().add(buscarCompra());
+                colCompraId.setCellValueFactory(new PropertyValueFactory<DetalleCompra, Integer>("compraId"));
+                colFechaCompra.setCellValueFactory(new PropertyValueFactory<DetalleCompra, String>("fechaCompra"));
+                colCantidadCompra.setCellValueFactory(new PropertyValueFactory<DetalleCompra, Integer>("cantidadCompra"));
+                colProducto.setCellValueFactory(new PropertyValueFactory<DetalleCompra, String>("producto"));
+                colTotalCompra.setCellValueFactory(new PropertyValueFactory<DetalleCompra, Integer>("totalCompra"));
+            }
+        }else if(event.getSource() == btnVaciar){
+            vaciarCampos();
+        }
+    }
+    
+    public void vaciarCampos(){
+        tfCompraId.clear();
+        dpFechaCompra.setValue(null);
+        tfCantidad.clear();
+        tfTotalCompra.clear();
+        cmbProductos.getSelectionModel().clearSelection();
+        tfBuscarCompra.clear();
+    }
+    
+    public void cargarDatosEditar(){
+        DetalleCompra dc = (DetalleCompra)tblCompras.getSelectionModel().getSelectedItem();
+        if(dc != null){
+            tfCompraId.setText(Integer.toString(dc.getCompraId()));
+            dpFechaCompra.setValue(dc.getFechaCompra().toLocalDate());
+            tfCantidad.setText(Integer.toString(dc.getCantidadCompra()));
+            tfTotalCompra.setText(Double.toString(dc.getTotalCompra()));
+            cmbProductos.getSelectionModel().select(obtenerIndexProducto());
+        }
+    }
+    
+     public int obtenerIndexProducto(){
+        int index = 0;
+        for(int i = 0 ; i < cmbProductos.getItems().size() ; i++){
+            String productoCmb = cmbProductos.getItems().get(i).toString();
+            String productoTbl = ((DetalleCompra)tblCompras.getSelectionModel().getSelectedItem()).getProducto();
+            if(productoCmb.equals(productoTbl)){
+                index = i;
+                break;
             }
         }
+        return index;
     }
     
     public void cargarListaCompras(){
@@ -198,11 +251,13 @@ public class MenuDetalleCompraController implements Initializable {
     public void editarCompra(){
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_editarCompra(?,?,?)";
+            String sql = "call sp_editarDetalleCompra(?,?,?,?,?)";
             statement = conexion.prepareStatement(sql);
             statement.setInt(1,Integer.parseInt(tfCompraId.getText()));
-            statement.setString(2, tfFechaCompra.getText());
-            statement.setString(3, tfTotalCompra.getText());
+            statement.setDate(2, Date.valueOf(dpFechaCompra.getValue()));
+            statement.setDouble(3, Double.parseDouble(tfTotalCompra.getText()));
+            statement.setInt(4, Integer.parseInt(tfCantidad.getText()));
+            statement.setInt(5, ((Producto)cmbProductos.getSelectionModel().getSelectedItem()).getProductoId());
             statement.execute();
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -243,21 +298,24 @@ public class MenuDetalleCompraController implements Initializable {
         }
     }
     
-   /* public Compra buscarCompra(){
-        Compra compra = null;
+    public DetalleCompra buscarCompra(){
+        DetalleCompra detalleCompra = null;
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_buscarCompra(?)";
+            String sql = "call sp_buscarDetalleCompra(?)";
             statement = conexion.prepareStatement(sql);
-            statement.setInt(1, Integer.parseInt(tfCompraId.getText()));
+            statement.setInt(1, Integer.parseInt(tfBuscarCompra.getText()));
             resultSet = statement.executeQuery();
             
             if(resultSet.next()){
-                int compraId = resultSet.getInt("compraId");
-                String fecha = resultSet.getString("fechaCompra");
+                 int compraId = resultSet.getInt("compraId");
+                Date fecha = resultSet.getDate("fechaCompra");
                 double total = resultSet.getDouble("totalCompra");
+                int cantidad = resultSet.getInt("cantidadCompra");
+                String producto = resultSet.getString("producto");
                 
-                compra = (new Compra(compraId,fecha,total));
+                
+                detalleCompra = (new DetalleCompra(cantidad,producto,compraId,fecha,total));
             }
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -276,8 +334,8 @@ public class MenuDetalleCompraController implements Initializable {
               System.out.println(e.getMessage());
             }
         }
-        return compra;
-    }*/
+        return detalleCompra;
+    }
     
     public Main getStage() {
         return stage;

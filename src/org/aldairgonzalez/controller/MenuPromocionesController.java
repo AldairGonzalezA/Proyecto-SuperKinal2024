@@ -258,7 +258,7 @@ public class MenuPromocionesController implements Initializable {
             statement.setDate(4, Date.valueOf(dpFechaInicio.getValue()));
             statement.setDate(5, Date.valueOf(dpFechaFinalizacion.getValue()));
             statement.setInt(6, ((Producto)cmbProductos.getSelectionModel().getSelectedItem()).getProductoId());
-            
+            statement.execute();
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }finally{

@@ -12,7 +12,7 @@ import java.sql.Date;
  * @author Compu Fire
  */
 public class DetalleCompra extends Compra {
-    private int detalleFacturaId;
+    private int detalleCompraId;
     private int cantidadCompra;
     private int productoId;
     private String producto;
@@ -22,17 +22,17 @@ public class DetalleCompra extends Compra {
     public DetalleCompra() {
     }
 
-    public DetalleCompra(int detalleFacturaId, int cantidadCompra, int productoId, int compraid, int compraId,  Date fechaCompra, double totalCompra) {
+    public DetalleCompra(int detalleCompraId, int cantidadCompra, int productoId, int compraid, int compraId,  Date fechaCompra, double totalCompra) {
         super(compraId, fechaCompra, totalCompra);
-        this.detalleFacturaId = detalleFacturaId;
+        this.detalleCompraId = detalleCompraId;
         this.cantidadCompra = cantidadCompra;
         this.productoId = productoId;
         this.compraid = compraid;
     }
 
-    public DetalleCompra(int detalleFacturaId, int cantidadCompra, String producto, String compra, int compraId, Date fechaCompra, double totalCompra) {
+    public DetalleCompra(int detalleCompraId, int cantidadCompra, String producto, String compra, int compraId, Date fechaCompra, double totalCompra) {
         super(compraId, fechaCompra, totalCompra);
-        this.detalleFacturaId = detalleFacturaId;
+        this.detalleCompraId = detalleCompraId;
         this.cantidadCompra = cantidadCompra;
         this.producto = producto;
         this.compra = compra;
@@ -45,12 +45,12 @@ public class DetalleCompra extends Compra {
     }
     
 
-    public int getDetalleFacturaId() {
-        return detalleFacturaId;
+    public int getDetalleCompraId() {
+        return detalleCompraId;
     }
 
-    public void setDetalleFacturaId(int detalleFacturaId) {
-        this.detalleFacturaId = detalleFacturaId;
+    public void setDetalleCompraId(int detalleCompraId) {
+        this.detalleCompraId = detalleCompraId;
     }
 
     public int getCantidadCompra() {
@@ -95,7 +95,7 @@ public class DetalleCompra extends Compra {
 
     @Override
     public String toString() {
-        return "DetalleCompra{" + "detalleFacturaId=" + detalleFacturaId + ", cantidadCompra=" + cantidadCompra + ", productoId=" + productoId + ", producto=" + producto + ", compraid=" + compraid + ", compra=" + compra + '}';
+        return "DetalleCompra{" + "detalleCompraId=" + detalleCompraId + ", cantidadCompra=" + cantidadCompra + ", productoId=" + productoId + ", producto=" + producto + ", compraid=" + compraid + ", compra=" + compra + '}';
     }
     
     

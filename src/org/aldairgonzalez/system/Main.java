@@ -21,6 +21,7 @@ import org.aldairgonzalez.controller.MenuCargosController;
 import org.aldairgonzalez.controller.MenuCategoriaProductoController;
 import org.aldairgonzalez.controller.MenuClientesController;
 import org.aldairgonzalez.controller.MenuDetalleCompraController;
+import org.aldairgonzalez.controller.MenuDetalleFacturaController;
 import org.aldairgonzalez.controller.MenuDistribuidoresController;
 import org.aldairgonzalez.controller.MenuEmpleadosController;
 import org.aldairgonzalez.controller.MenuPrincipalController;
@@ -191,6 +192,15 @@ public class Main extends Application {
         try{
             MenuPromocionesController menuPromocionesView = (MenuPromocionesController)switchScene("MenuPromocionesView.fxml", 1200, 650);
             menuPromocionesView.setStage(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void menuDetalleFacturaView(){
+        try{
+            MenuDetalleFacturaController menuDetalleFacturaView = (MenuDetalleFacturaController)switchScene("MenuDetalleFacturaView.fxml", 1200,650);
+            menuDetalleFacturaView.setStage(this);
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
