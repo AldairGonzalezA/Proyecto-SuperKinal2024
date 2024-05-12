@@ -194,7 +194,8 @@ public class MenuEmpleadosController implements Initializable {
             statement.setTime(4, horaEntrada);
             statement.setTime(5, horaSalida);
             statement.setInt(6,((Cargo)cmbCargo.getSelectionModel().getSelectedItem()).getCargoId());
-            statement.setInt(7, ((Empleado)cmbEncargado.getSelectionModel().getSelectedItem()).getEncargadoId());
+            statement.setInt(7, ((Empleado)cmbEncargado.getSelectionModel().getSelectedItem()).getEmpleadoId());
+            statement.execute();
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }finally{

@@ -20,7 +20,7 @@
       <TextField fx:id="tfTicketId" editable="false" layoutX="33.0" layoutY="163.0" prefHeight="38.0" prefWidth="207.0" promptText="Ticket Id" />
       <TextArea fx:id="taDescripcion" layoutX="33.0" layoutY="262.0" prefHeight="140.0" prefWidth="353.0" wrapText="true" />
       <ComboBox fx:id="cmbClientes" layoutX="406.0" layoutY="169.0" prefHeight="25.0" prefWidth="200.0" />
-      <ComboBox fx:id="cmbFactura" layoutX="679.0" layoutY="169.0" prefHeight="25.0" prefWidth="200.0" />
+      <ComboBox fx:id="cmbFacturas" layoutX="679.0" layoutY="169.0" prefHeight="25.0" prefWidth="200.0" />
       <TableView fx:id="tblTickets" layoutX="406.0" layoutY="229.0" onMouseClicked="#cargarDatosEditar" prefHeight="384.0" prefWidth="758.0">
         <columns>
           <TableColumn fx:id="colTicketId" prefWidth="75.0" text="Ticket Id" />

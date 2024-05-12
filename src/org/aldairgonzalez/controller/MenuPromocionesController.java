@@ -54,12 +54,11 @@ public class MenuPromocionesController implements Initializable {
     @FXML
     ComboBox cmbProductos;
     @FXML
-    Button btnGuardar, btnRegresar, btnVaciar;
+    Button btnGuardar, btnRegresar, btnVaciar, btnBuscar;
     @FXML
     TableView tblPromociones;
     @FXML
     TableColumn colPromocionId, colPrecio, colDescripcion, colFechaInicio,colFechaFinalizacion, colProducto;
-    
     
     /**
      * Initializes the controller class.
@@ -77,7 +76,7 @@ public class MenuPromocionesController implements Initializable {
         }else if(event.getSource() == btnGuardar){
             if(tfPromocionId.getText().isEmpty()){
                 agregarPromocion();
-                cargarDatos();
+                 cargarDatos();
             }else{
                 editarPromocion();
                 cargarDatos();
@@ -222,13 +221,14 @@ public class MenuPromocionesController implements Initializable {
         
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_agregarPromocion(?,?,?,?,?)";
+            String sql = "call sp_agregarPromociones(?,?,?,?,?)";
             statement = conexion.prepareStatement(sql);
             statement.setDouble(1, Double.parseDouble(tfPrecioPromocion.getText()));
             statement.setString(2, taDescripcion.getText());
-            statement.setDate(3, Date.valueOf(dpFechaInicio.getValue()));
-            statement.setDate(4, Date.valueOf(dpFechaFinalizacion.getValue()));
+            statement.setDate(3, date.valueOf(dpFechaInicio.getValue()));
+            statement.setDate(4, date.valueOf(dpFechaFinalizacion.getValue()));
             statement.setInt(5, ((Producto)cmbProductos.getSelectionModel().getSelectedItem()).getProductoId());
+            statement.execute();
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }finally{

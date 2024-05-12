@@ -228,7 +228,7 @@ public class MenuDetalleCompraController implements Initializable {
             conexion = Conexion.getInstance().obtenerConexion();
             String sql = "call sp_agregarCompra(?,?,?)";
             statement = conexion.prepareStatement(sql);
-            statement.setDate(1, Date.valueOf(dpFechaCompra.getValue()));
+            statement.setDate(1, date.valueOf(dpFechaCompra.getValue()));
             statement.setInt(2, Integer.parseInt(tfCantidad.getText()));
             statement.setInt(3, ((Producto)cmbProductos.getSelectionModel().getSelectedItem()).getProductoId());
             statement.execute();
