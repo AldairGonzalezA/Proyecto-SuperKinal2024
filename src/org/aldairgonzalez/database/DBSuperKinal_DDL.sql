@@ -21,6 +21,7 @@ create table Cargos (
 
 create table Compras (
 	compraId int not null auto_increment,
+    fechaCompra date not null,
     totalCompra decimal(10,2),
     primary key PK_compraId (compraId)
 );
@@ -49,7 +50,7 @@ create table Empleados (
     sueldo decimal(10,2) not null,
     horaEntrada time not null,
     horaSalida time not null,
-    cargoId int not null ,
+    cargoId int not null,
     encargadoId int,
     primary key PK_empleadoId (empleadoId),
     constraint FK_Empleado_Cargos foreign key (cargoId)
@@ -77,7 +78,7 @@ create table TicketSoporte (
     descripcionTicket varchar(250) not null,
     estatus varchar(30) not null,
     clienteId int not null,
-    facturaId int,
+    facturaId int not null,
     primary key PK_ticketSoporte (ticketSoporteId),
     constraint FK_TicketSoporte_Clientes foreign key (clienteId)
 		references Clientes (clienteId),
@@ -137,6 +138,3 @@ create table DetalleCompra (
 	constraint FK_DetalleCompra_Compras foreign key (compraId)
 		references Compras (compraId)
 );
-
-insert into Facturas (fecha, hora, clienteId, empleadoId) values
-	('2024-04-25', 1600, 1, 1);
