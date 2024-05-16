@@ -5,15 +5,20 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.aldairgonzalez.controller.MenuDetalleFacturaController">
    <children>
-      <ImageView fitHeight="650.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="650.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/Menu%20Facturas.png" />
+         </image></ImageView>
       <TableView fx:id="tblFacturas" layoutX="376.0" layoutY="225.0" onMouseClicked="#cargarDatosDetalle" prefHeight="405.0" prefWidth="810.0">
         <columns>
           <TableColumn fx:id="colFacturaId" prefWidth="75.0" text="Factura ID" />
@@ -49,10 +54,24 @@
             <TextField fx:id="tfFecha" editable="false" promptText="Fecha" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Button fx:id="btnGuardar" layoutX="57.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="44.0" prefWidth="85.0" text="Guardar" />
-      <Button fx:id="btnVaciar" layoutX="180.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="44.0" prefWidth="85.0" text="Vaciar" />
-      <Button fx:id="btnRegresar" layoutX="31.0" layoutY="605.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Regresar" />
+      <Button fx:id="btnGuardar" layoutX="57.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="44.0" prefWidth="85.0" style="-fx-background-color: #012030;" text="Guardar" textFill="#f9f6f6">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnVaciar" layoutX="180.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="44.0" prefWidth="85.0" style="-fx-background-color: #012030;" text="Vaciar" textFill="WHITE">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnRegresar" layoutX="31.0" layoutY="569.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="61.0" prefWidth="85.0" style="-fx-background-color: #012030;" text="Regresar" textFill="WHITE">
+         <font>
+            <Font name="Times New Roman" size="13.0" />
+         </font></Button>
       <TextField fx:id="tfBuscarFactura" layoutX="376.0" layoutY="189.0" prefHeight="25.0" prefWidth="207.0" promptText="Ingrese el ID de la factura a buscar" />
-      <Button fx:id="btnBuscar" layoutX="592.0" layoutY="189.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Button" />
+      <Button fx:id="btnBuscar" layoutX="592.0" layoutY="189.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="29.0" text="Button" />
+      <ImageView fitHeight="25.0" fitWidth="29.0" layoutX="594.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/Lupa.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

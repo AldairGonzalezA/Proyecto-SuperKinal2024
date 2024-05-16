@@ -138,3 +138,24 @@ create table DetalleCompra (
 	constraint FK_DetalleCompra_Compras foreign key (compraId)
 		references Compras (compraId)
 );
+
+-- Usuarios: Almacenar los usuarios del programa (usuario, contrasenia, nivelAcceso)
+
+create table Usuarios(
+	usuarioId int not null auto_increment,
+    ususario varchar(30) not null,
+    contrasenia varchar(100) not null,
+    nivelAccesoId int not null,
+    empleadoId int not null,
+    primary key PK_usuarioId (usuarioId),
+    constraint FK_Usuarios_NivelesAcceso foreign key Usuarios(nivelAccesoId)
+		references NivelesAcceso(nivelAccesoId),
+	constraint FK_Usuarios_Empleados foreign key Usuarios(empleadoId)
+		references Empleados (empleadoId)
+);
+
+create table NivelesAcceso(
+	nivelAccesoId int not null auto_increment,
+    nivelAcceso varchar(40) not null,
+    primary key nivelAccesoId (nivelAccesoId)
+);

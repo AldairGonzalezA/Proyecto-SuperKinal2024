@@ -7,13 +7,11 @@ DECLARE total DECIMAL(10,2) DEFAULT 0.0;
     DECLARE precio DECIMAL(10,2);
     DECLARE cantidad INT;
     
-    -- Obtener el total para la compra actual
     SELECT SUM(P.precioCompra * DC.cantidadCompra) INTO total
     FROM DetalleCompra DC
     JOIN Productos P ON DC.productoId = P.productoId
     WHERE DC.compraId = comId;
     
-    -- Actualizar el total de la compra en la tabla Compras
     CALL sp_asignarTotalCompra(total, comId);
     
     RETURN total;
@@ -77,7 +75,7 @@ end $$
 delimiter ; 
 
 DELIMITER $$
-CREATE TRIGGER tg_totalFactura
+create TRIGGER tg_totalFactura
 after INSERT ON DetalleFactura
 FOR EACH ROW
 BEGIN
@@ -110,7 +108,8 @@ BEGIN
         SELECT P.promocionId, P.productoId, P.fechaInicio, P.fechaFinalizacion 
         FROM Promociones P;
     
-    -- Obtener el producto y la fecha de la factura
+
+
     SELECT DF.productoId, F.fecha INTO producto, fechaFac
     FROM DetalleFactura DF
     JOIN Facturas F ON F.facturaId = DF.facturaId
@@ -132,7 +131,7 @@ BEGIN
         END IF;
     END LOOP totalLoop;
     CLOSE cursorPromociones;
-    -- Llamar a la procedimiento para asignar el precio total
+
     CALL sp_asignarPrecioPromo(factId, total);
     RETURN total;
 END $$

@@ -99,7 +99,7 @@ public class MenuEmpleadosController implements Initializable {
         colSueldo.setCellValueFactory(new PropertyValueFactory<Empleado, Double>("sueldo"));
         colEntrada.setCellValueFactory(new PropertyValueFactory<Empleado, Time>("horaEntrada"));
         colSalida.setCellValueFactory(new PropertyValueFactory<Empleado, Time>("horaSalida"));
-        colCargo.setCellValueFactory(new PropertyValueFactory<Empleado, String>("Cargo"));
+        colCargo.setCellValueFactory(new PropertyValueFactory<Empleado, String>("cargo"));
         colEncargado.setCellValueFactory(new PropertyValueFactory<Empleado, String>("encargado"));
     }
     
@@ -270,8 +270,8 @@ public class MenuEmpleadosController implements Initializable {
             statement.setDouble(4, Double.parseDouble(tfSueldo.getText()));
             statement.setTime(5, horaEntrada);
             statement.setTime(6, horaSalida);
-            statement.setString(7, ((Cargo)cmbCargo.getSelectionModel().getSelectedItem()).toString());
-            statement.setString(8, (cmbEncargado.getSelectionModel().getSelectedItem()).toString());
+            statement.setInt(7, ((Cargo)cmbCargo.getSelectionModel().getSelectedItem()).getCargoId());
+            statement.setInt(8, ((Empleado)cmbEncargado.getSelectionModel().getSelectedItem()).getEmpleadoId());
             statement.execute();
         }catch(SQLException e){
             System.out.println(e.getMessage());
