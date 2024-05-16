@@ -7,9 +7,11 @@ package org.aldairgonzalez.controller;
 
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -26,6 +28,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.aldairgonzalez.dao.Conexion;
 import org.aldairgonzalez.model.Cliente;
+import org.aldairgonzalez.model.DetalleFactura;
+import org.aldairgonzalez.model.Factura;
 import org.aldairgonzalez.model.TicketSoporte;
 import org.aldairgonzalez.system.Main;
 
@@ -44,7 +48,7 @@ public class MenuTicketSoporteController implements Initializable {
     @FXML
     Button btnGuardar, btnRegresar, btnVaciar;
     @FXML
-    ComboBox cmbEstatus, cmbClientes;
+    ComboBox cmbEstatus, cmbClientes, cmbFacturas;
     @FXML
     TableView tblTickets;
     @FXML
@@ -58,6 +62,7 @@ public class MenuTicketSoporteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         cargarCmbEstatus();
         cmbClientes.setItems(listarClientes());
+        cmbFacturas.setItems(listarDetalleFacturas());
         cargarDatos();
     }    
     
@@ -211,6 +216,46 @@ public class MenuTicketSoporteController implements Initializable {
         return FXCollections.observableList(clientes);
     }
     
+    public ObservableList<DetalleFactura> listarDetalleFacturas(){
+        ArrayList<DetalleFactura> detalleFacturas = new ArrayList<>();
+        
+        try{
+            conexion = Conexion.getInstance().obtenerConexion();
+            String sql = "call sp_listarDetalleFactura()";
+            statement = conexion.prepareStatement(sql);
+            resultSet = statement.executeQuery();
+            
+            while(resultSet.next()){
+                int facturaId = resultSet.getInt("facturaId");
+                Date fecha = resultSet.getDate("fecha");
+                Time hora = resultSet.getTime("hora");
+                double total = resultSet.getDouble("total");
+                String cliente = resultSet.getString("cliente");
+                String empleado = resultSet.getString("empleado");
+                String producto = resultSet.getString("producto");
+                
+                detalleFacturas.add(new DetalleFactura(producto,facturaId,fecha,hora,total,cliente,empleado));
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }finally{
+            try{
+                if(resultSet != null){
+                    resultSet.close();
+                }
+                if(statement != null){
+                    statement.close();
+                }
+                if(conexion != null){
+                    conexion.close();
+                }
+            }catch(SQLException e){
+                System.out.println(e.getMessage());
+            }
+        }
+        return FXCollections.observableList(detalleFacturas);
+    }
+    
     public void agregarTickets(){
         try{
             conexion = Conexion.getInstance().obtenerConexion();
@@ -218,7 +263,7 @@ public class MenuTicketSoporteController implements Initializable {
             statement = conexion.prepareStatement(sql);
             statement.setString(1, taDescripcion.getText());
             statement.setInt(2,((Cliente)cmbClientes.getSelectionModel().getSelectedItem()).getClienteId());
-            statement.setInt(3, 1);
+            statement.setInt(3, ((DetalleFactura)cmbFacturas.getSelectionModel().getSelectedItem()).getFacturaId());
             statement.execute();
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -245,7 +290,7 @@ public class MenuTicketSoporteController implements Initializable {
             statement.setString(2, taDescripcion.getText());
             statement.setString(3, cmbEstatus.getSelectionModel().getSelectedItem().toString());
             statement.setString(4, ((Cliente)cmbClientes.getSelectionModel().getSelectedItem()).toString());
-            statement.setInt(5,1);
+            statement.setString(5,((DetalleFactura)cmbFacturas.getSelectionModel().getSelectedItem()).toString());
             statement.execute();
             
         }catch(SQLException e ){

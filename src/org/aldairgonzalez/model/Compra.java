@@ -5,19 +5,21 @@
  */
 package org.aldairgonzalez.model;
 
+import java.sql.Date;
+
 /**
  *
  * @author Compu Fire
  */
 public class Compra {
     private int compraId;
-    private String fechaCompra;
+    private Date fechaCompra;
     private double totalCompra;
 
     public Compra() {
     }
 
-    public Compra(int compraId, String fechaCompra,double totalCompra) {
+    public Compra(int compraId, Date fechaCompra,double totalCompra) {
         this.compraId = compraId;
         this.fechaCompra = fechaCompra;
         this.totalCompra = totalCompra;
@@ -31,11 +33,11 @@ public class Compra {
         this.compraId = compraId;
     }
 
-    public String getFechaCompra() {
+    public Date getFechaCompra() {
         return fechaCompra;
     }
 
-    public void setFechaCompra(String fechaCompra) {
+    public void setFechaCompra(Date fechaCompra) {
         this.fechaCompra = fechaCompra;
     }
 
