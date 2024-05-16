@@ -96,6 +96,8 @@ private Main stage;
                 colEmpleado.setCellValueFactory(new PropertyValueFactory<DetalleFactura, String>("empleado"));
                 colTotal.setCellValueFactory(new PropertyValueFactory<DetalleFactura, Double>("total"));
             }
+        } else if(event.getSource() == btnVaciar){
+            vaciarCampos();
         }
     }
     
