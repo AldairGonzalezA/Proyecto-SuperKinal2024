@@ -15,11 +15,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import org.aldairgonzalez.dao.Conexion;
 import org.aldairgonzalez.dto.ClienteDTO;
 import org.aldairgonzalez.model.Cliente;
 import org.aldairgonzalez.system.Main;
+import org.aldairgonzalez.utils.SuperKinalAlert;
 
 /**
  * FXML Controller class
@@ -116,13 +118,24 @@ public class FormClientesController implements Initializable {
 
     public void handleButtonAction(ActionEvent event) {
         if (event.getSource() == btnAgregar) {
-            if (op == 1) {
-                agregarClientes();
-                stage.menuClientesView();
+            if (op == 1) { 
+                if(!tfNombre.getText().equals("") && !tfApellido.getText().equals("") && !tfDireccion.getText().equals("")){
+                    agregarClientes();
+                    stage.menuClientesView();
+                    SuperKinalAlert.getInstance().mostrarAlertasInfo(401);
+                } else {
+                    SuperKinalAlert.getInstance().mostrarAlertasInfo(400);
+                    tfNombre.requestFocus();
+                    return;
+                }
             } else if (op == 2) {
-                editarCliente();
-                ClienteDTO.getClienteDTO().setCliente(null);
-                stage.menuClientesView();
+              if(!tfNombre.getText().equals("") && !tfApellido.getText().equals("") && !tfDireccion.getText().equals("")){
+                  if(SuperKinalAlert.getInstance().mostrarAlertaConfirmacion(500).get() == ButtonType.OK){
+                      editarCliente();
+                      ClienteDTO.getClienteDTO().setCliente(null);
+                      stage.menuClientesView();
+                  }
+              }
             }
         } else if (event.getSource() == btnRegresar) {
             stage.menuClientesView();

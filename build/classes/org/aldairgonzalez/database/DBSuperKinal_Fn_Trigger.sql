@@ -66,32 +66,34 @@ begin
         FROM Promociones P;
         
 	declare cursorDetalleFactura cursor for
-		Select DF.facturaId, DF.productoId from DetalleFactura DF;
+		Select DF.facturaId from DetalleFactura DF;
+        
 	open cursorDetalleFactura;
     open cursorPromociones;
     
-    SELECT DF.productoId, F.fecha INTO producto, fechaFac
+    SELECT DF.productoId INTO producto
     FROM DetalleFactura DF
-    JOIN Facturas F ON F.facturaId = DF.facturaId
-		WHERE DF.facturaId = factId
     LIMIT 1;
     
     totalLoop: LOOP
+		fetch cursorDetalleFactura into curFacId;
         FETCH cursorPromociones INTO curPromoId, curProId, curFecIni, curFecFin;
-        IF producto = curProId THEN
-			if curPromoId is not null then
-				SET inicio = curFecIni;
-				SET final = curFecFin;
-				SET precio = (SELECT P.precioPromocion FROM Promociones P WHERE promocionId = curPromoId);
-                IF fechaFac BETWEEN inicio AND final THEN
-				SET total = precio;
-				LEAVE totalLoop;
-				END IF;
-            else 
-				set precio = (select P.precioVentaUnitario from Productos P where P.productoId = curProId);
-				set total = total + precio;
+			if factId = curFacId then
+				IF producto = curProId THEN
+				if curPromoId is not null then
+					SET inicio = curFecIni;
+					SET final = curFecFin;
+					SET precio = (SELECT P.precioPromocion FROM Promociones P WHERE promocionId = curPromoId);
+					IF now() BETWEEN inicio AND final THEN
+					SET total = precio;
+					LEAVE totalLoop;
+					END IF;
+				else 
+					set precio = (select P.precioVentaUnitario from Productos P where P.productoId = curProId);
+					set total = total + precio;
+				end if;
+			END IF;
             end if;
-        END IF;
         
         if i = (select count(*) from detalleFactura) then
 			leave totalLoop;
@@ -100,24 +102,11 @@ begin
     
     END LOOP totalLoop;
     CLOSE cursorPromociones;
+    close cursorDetalleFactura;
     
- 
-    
-
     call sp_asignarTotal(total, factId);
     return total;
 end $$
-delimiter ; 
-
-DELIMITER $$
-create TRIGGER tg_totalFactura
-after INSERT ON DetalleFactura
-FOR EACH ROW
-BEGIN
-    DECLARE total DECIMAL(10,2);
-    SET total = fn_calcularTotal(NEW.facturaId);
-END $$
-DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE sp_asignarTotal(IN tot DECIMAL(10,2), IN factId INT)

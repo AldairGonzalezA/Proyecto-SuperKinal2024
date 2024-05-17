@@ -20,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -32,6 +33,7 @@ import org.aldairgonzalez.model.DetalleFactura;
 import org.aldairgonzalez.model.Factura;
 import org.aldairgonzalez.model.TicketSoporte;
 import org.aldairgonzalez.system.Main;
+import org.aldairgonzalez.utils.SuperKinalAlert;
 
 /**
  * FXML Controller class
@@ -70,11 +72,18 @@ public class MenuTicketSoporteController implements Initializable {
     public void handleButtonAction(ActionEvent event){
         if(event.getSource() == btnGuardar){
             if(tfTicketId.getText().isEmpty() ){
-                agregarTickets();
-                cargarDatos();
+                if(!taDescripcion.getText().equals("") && !cmbEstatus.getSelectionModel().isEmpty() && !cmbClientes.getSelectionModel().isEmpty() && !cmbFacturas.getSelectionModel().isEmpty()){
+                    agregarTickets();
+                    cargarDatos();
+                    SuperKinalAlert.getInstance().mostrarAlertasInfo(401);
+                }else {
+                    SuperKinalAlert.getInstance().mostrarAlertasInfo(400);
+                }
             }else{
-                editarTickets();
-                cargarDatos();
+                     if(SuperKinalAlert.getInstance().mostrarAlertaConfirmacion(500).get() == ButtonType.OK){
+                         editarTickets();
+                         cargarDatos();
+                     }
             }
         }else if(event.getSource() == btnRegresar){
             stage.menuPrincipalView();
@@ -109,6 +118,7 @@ public class MenuTicketSoporteController implements Initializable {
             tfTicketId.setText(Integer.toString(ts.getTicketSoporteId()));
             cmbEstatus.getSelectionModel().select(0);
             cmbClientes.getSelectionModel().select(obtenerIndexCliente());
+            cmbFacturas.getSelectionModel().select(obtenerIndexFactura());
             taDescripcion.setText(ts.getDescripcionTicket());
         }
     }
@@ -116,7 +126,7 @@ public class MenuTicketSoporteController implements Initializable {
     // Cargar el comboxClientes
     public int obtenerIndexCliente(){
         int index = 0;
-        for(int i = 0 ; i <= cmbClientes.getItems().size() ; i++){
+        for(int i = 0 ; i < cmbClientes.getItems().size() ; i++){
             String clienteCmb = cmbClientes.getItems().get(i).toString();
             String clienteTbl = ((TicketSoporte)tblTickets.getSelectionModel().getSelectedItem()).getCliente();
             if(clienteCmb.equals(clienteTbl)){
@@ -125,6 +135,19 @@ public class MenuTicketSoporteController implements Initializable {
             }
         }
         
+        return index;
+    }
+    
+    public int obtenerIndexFactura(){
+        int index = 0;
+        for(int i = 0; i < cmbFacturas.getItems().size(); i++){
+            String facturaCmb = cmbFacturas.getItems().get(i).toString();
+            String facturaTbl = ((TicketSoporte)tblTickets.getSelectionModel().getSelectedItem()).getFactura();
+            if(facturaCmb.equals(facturaTbl)){
+                index = i;
+                break;
+            }
+        }
         return index;
     }
     
@@ -148,9 +171,9 @@ public class MenuTicketSoporteController implements Initializable {
                 String descripcion = resultSet.getString("descripcionTicket");
                 String estatus = resultSet.getString("estatus");
                 String cliente = resultSet.getString("cliente");
-                int facturaId = resultSet.getInt("facturaId");
+                String factura = resultSet.getString("facturaId");
                 
-                tickets.add(new TicketSoporte(ticketSoporteId,descripcion,estatus,cliente,facturaId));
+                tickets.add(new TicketSoporte(ticketSoporteId,descripcion,estatus,cliente,factura));
                 
             }
         }catch(SQLException e ){

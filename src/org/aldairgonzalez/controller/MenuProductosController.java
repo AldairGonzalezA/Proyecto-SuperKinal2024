@@ -114,9 +114,11 @@ public class MenuProductosController implements Initializable {
             if(tfProductoId.getText().isEmpty()){
                 agregarProducto();
                 cargarDatosProductos();
+                vaciarCampos();
             }else {
                 editarProductos();
                 cargarDatosProductos();
+                vaciarCampos();
             }
         }
     }

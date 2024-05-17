@@ -226,11 +226,10 @@ public class MenuDetalleCompraController implements Initializable {
         Date date = Date.valueOf(localDate);
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_agregarCompra(?,?,?)";
+            String sql = "call sp_agregarCompra(?,?)";
             statement = conexion.prepareStatement(sql);
-            statement.setDate(1, date.valueOf(dpFechaCompra.getValue()));
-            statement.setInt(2, Integer.parseInt(tfCantidad.getText()));
-            statement.setInt(3, ((Producto)cmbProductos.getSelectionModel().getSelectedItem()).getProductoId());
+            statement.setInt(1, Integer.parseInt(tfCantidad.getText()));
+            statement.setInt(2, ((Producto)cmbProductos.getSelectionModel().getSelectedItem()).getProductoId());
             statement.execute();
         }catch(SQLException e){
             System.out.println(e.getMessage());

@@ -44,7 +44,7 @@ public class MenuCategoriaProductoController implements Initializable {
     @FXML
     TableColumn colCategoriaId, colNombreCategoria, colDescripcion;
     @FXML
-    Button btnAgregar, btnEditar, btnBuscar, btnElimnar, btnRegresar;
+    Button btnAgregar, btnEditar, btnBuscar, btnEliminar, btnRegresar;
     @FXML
     TextField tfCategoriaId;
     /**
@@ -66,11 +66,9 @@ public class MenuCategoriaProductoController implements Initializable {
     public void handleButtonAction(ActionEvent event){
         if(event.getSource() == btnRegresar){
             stage.menuPrincipalView();
-        } else if(event.getSource() == btnElimnar){
+        } else if(event.getSource() == btnEliminar){
             int cateId = ((CategoriaProducto)tblCategorias.getSelectionModel().getSelectedItem()).getCategoriaProductoId();
             eliminarCategoria(cateId);
-        } else if(event.getSource() == btnEditar){
-            CategoriaProductoDTO.getCategoriaProductoDTO().setCategoriaProducto((CategoriaProducto)tblCategorias.getSelectionModel().getSelectedItem());
             
         }else if(event.getSource() == btnBuscar){
             tblCategorias.getItems().clear();

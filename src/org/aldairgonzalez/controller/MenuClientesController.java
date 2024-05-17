@@ -21,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -30,6 +31,7 @@ import org.aldairgonzalez.dao.Conexion;
 import org.aldairgonzalez.dto.ClienteDTO;
 import org.aldairgonzalez.model.Cliente;
 import org.aldairgonzalez.system.Main;
+import org.aldairgonzalez.utils.SuperKinalAlert;
 
 /**
  * FXML Controller class
@@ -82,9 +84,11 @@ public class MenuClientesController implements Initializable {
             stage.formClientesView(2);
 
         }else if(event.getSource() == btnEliminar){
-            int cliId = ((Cliente)tblClientes.getSelectionModel().getSelectedItem()).getClienteId();
+           if(SuperKinalAlert.getInstance().mostrarAlertaConfirmacion(405).get() == ButtonType.OK){
+                int cliId = ((Cliente)tblClientes.getSelectionModel().getSelectedItem()).getClienteId();
             eliminarCliente(cliId);
             cargarLista();
+           }
         }else if(event.getSource() == btnBuscar){
             tblClientes.getItems().clear();
             if(tfClienteId.getText().equals("")){

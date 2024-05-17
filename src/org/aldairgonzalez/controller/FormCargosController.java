@@ -15,12 +15,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.aldairgonzalez.dao.Conexion;
 import org.aldairgonzalez.dto.CargoDTO;
 import org.aldairgonzalez.model.Cargo;
 import org.aldairgonzalez.system.Main;
+import org.aldairgonzalez.utils.SuperKinalAlert;
 
 /**
  * FXML Controller class
@@ -57,12 +59,23 @@ public class FormCargosController implements Initializable {
             stage.menuCargosView();
         } else if(event.getSource() == btnGuardar){
             if(op == 1){
-                agregarCargos();
-                stage.menuCargosView();
+                if(!tfNombreCargo.getText().equals("") && !taDescripcionCargo.getText().equals("")){
+                    agregarCargos();
+                    stage.menuCargosView();
+                    SuperKinalAlert.getInstance().mostrarAlertasInfo(401);
+                }else {
+                    SuperKinalAlert.getInstance().mostrarAlertasInfo(400);
+                    tfNombreCargo.requestFocus();
+                    return;
+                }
             } else if(op == 2){
-                editarCargos();
-                CargoDTO.getCargoDTO().setCargo(null);
-                stage.menuCargosView();
+               if(!tfNombreCargo.getText().equals("") && !taDescripcionCargo.getText().equals("")){
+                   if(SuperKinalAlert.getInstance().mostrarAlertaConfirmacion(500).get() == ButtonType.OK){
+                        editarCargos();
+                        CargoDTO.getCargoDTO().setCargo(null);
+                        stage.menuCargosView();
+                   }
+               }
             }
         } else if(event.getSource() == btnRegresar){
             stage.menuCargosView();

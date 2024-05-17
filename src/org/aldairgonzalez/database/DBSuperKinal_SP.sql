@@ -112,11 +112,11 @@ create procedure sp_listarCompra()
 DELIMITER ;
 
 DELIMITER $$
-create procedure sp_agregarCompra(in fecCom date, in can int, in proId int)
+create procedure sp_agregarCompra(in can int, in proId int)
 	begin 
 		declare nuevaCompraId int;
 		insert into Compras (fechaCompra) values
-			(fecCom);
+			(Date(NOW()));
             
 		set nuevaCompraId = last_insert_id();
 		call sp_agregarDetalleCompra(can,proId,nuevaCompraId);
@@ -130,6 +130,7 @@ create procedure sp_buscarCompra(in comId int)
 			where compraId = comId;
     end $$
 DELIMITER ;
+
 
 DELIMITER $$
 create procedure sp_editarCompra(in comId int,in fecCom date,in totCom decimal (10,2))
@@ -158,7 +159,7 @@ begin
 		(nomCat,desCat);
 end$$
 DELIMITER ;
- call sp_agregarCategoriaProductos('Carne', 'Alimentos de origen Animal');
+
 DELIMITER $$
 create procedure sp_listarCategoriaProductos()
 begin
@@ -200,7 +201,7 @@ begin
 		(nomDis,dirDis,nitDis,telDis,web);
 end$$
 DELIMITER ;
- CALL sp_agregarDistribuidor('Juan','Suchitepequez','2573960773895-0','2435-3812','https://www.FrutasFresca.com//');
+
 DELIMITER $$
 create procedure sp_listarDistribuidores()
 begin
@@ -246,8 +247,7 @@ create procedure sp_agregarEmpleados(in nomEmp varchar(30),in apeEmp varchar(30)
 			(nomEmp, apeEmp, sue, hoEn, hoSa, carId, encarId);
     end $$
 DELIMITER ;
-call sp_agregarEmpleados('Emanuel','Perez',250.00,0800,1700,1);
-drop procedure sp_agregarEmpleados;
+
 DELIMITER $$
 create procedure sp_listarEmpleados()
 	begin
@@ -308,7 +308,6 @@ create procedure sp_agregarFacturas(in cliId int, in empId int, in proId int)
     end $$
 DELIMITER ;
 
- call sp_agregarFacturas(1,1,1);
 DELIMITER $$
 create procedure sp_listarFacturas()
 	begin
@@ -365,7 +364,7 @@ begin
 end $$
 DELIMITER ;
 -- drop procedure sp_AgregarTicketSoporte;
-call sp_AgregarTicketSoporte('Tarjeta rechazada',1,1);
+
 select * from Clientes;
 DELIMITER $$
 create procedure sp_ListarTicketSoporte()
@@ -413,8 +412,8 @@ begin
 				where ticketSoporteId = tikId;
 end $$
 DELIMITER ;
-call sp_EditarTicketSoporte(7,'Hola','Finalizado',1,1);
-select * from TicketSoporte;
+
+
 -- CRUD Productos
 DELIMITER $$
 create procedure sp_listarProducto()
@@ -427,7 +426,7 @@ create procedure sp_listarProducto()
         left join CategoriaProductos CP on CP.categoriaProductoId = P.categoriaProductoId;
     end $$
 DELIMITER ;
-select * from Productos;
+
 
 DELIMITER $$
 create procedure sp_agregarProducto(in nom varchar(50),in des varchar(100),in can int, in preU decimal(10,2),in preM decimal(10,2),in preC decimal(10,2), in ima longblob, in disId int, in catId int)
@@ -436,7 +435,7 @@ create procedure sp_agregarProducto(in nom varchar(50),in des varchar(100),in ca
 			(nom, des, can, preU, preM, preC, ima, disId, catId);
 	end $$
 DELIMITER ;
-call sp_agregarProducto('Naranja', 'Fruta con sabor citrico',40,8.00,6.00,7.00,null,1,1);
+
 DELIMITER $$
 create procedure sp_buscarProducto(in proId int)
 	begin 
@@ -457,7 +456,7 @@ begin
     where productoId = proId;
 end $$
 DELIMITER ;
-call sp_buscarImagen(1);
+
 DELIMITER $$
 create procedure sp_editarProducto(in proId int, in nom varchar(50),in des varchar(100),in can int, in preU decimal(10,2),in preM decimal(10,2),in preC decimal(10,2), in ima longblob, in disId int, in catId int )
 	begin
@@ -492,7 +491,7 @@ create procedure sp_agregarPromociones(in prePro decimal(10, 2), in descPro varc
 			( prePro, descPro, feIni, feFina, proId);
     end $$
 DELIMITER ;
-call sp_agregarPromociones(4.00,'hola:)','2024-05-09', '2024-05-13',3);
+
 DELIMITER $$
 create procedure sp_listarPromociones()
 	begin
@@ -541,7 +540,7 @@ begin
 		(factId, prodId);
 end $$
 DELIMITER ;
-call sp_agregarDetalleFactura(2,2);
+
 DELIMITER $$
 create procedure sp_listarDetalleFactura()
 begin
@@ -583,7 +582,7 @@ begin
 			where DF.facturaId = detId;
 end $$
 DELIMITER ;
-call sp_BuscarDetalleFactura(22);
+
 DELIMITER $$
 create procedure sp_EditarDetalleFactura(in detId int, in factId int, in prodId int)
 begin
@@ -615,7 +614,7 @@ create procedure sp_agregarDetalleCompra(in canC int, in proId int,in comId int)
 			(canC, proId, comId);
     end $$
 DELIMITER ;
-call sp_agregarDetalleCompra(2,1,1);
+
 DELIMITER $$
 create procedure sp_buscarDetalleCompra(in detCId int)
 	begin 
@@ -656,4 +655,3 @@ create procedure sp_eliminarDetalleCompra(in detCId int)
 			where detalleCompraId = detCId;
     end $$
 DELIMITER ;
-select * from facturas;

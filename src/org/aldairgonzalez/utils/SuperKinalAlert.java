@@ -20,7 +20,7 @@ public class SuperKinalAlert {
         
     }
     
-    private static SuperKinalAlert getInstance(){
+    public static SuperKinalAlert getInstance(){
         if(instance == null){
             instance = new SuperKinalAlert();
         }
@@ -51,6 +51,12 @@ public class SuperKinalAlert {
             alert.setTitle("Eliminacion de registro");
             alert.setHeaderText("Eliminacion de registro");
             alert.setContentText("¿Desea confirmar la eliminacion de registro?");
+            action = alert.showAndWait();
+        } else if(code == 500){
+            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Edicion de Registro");
+            alert.setHeaderText("Edicion de Registro");
+            alert.setContentText("¿Desea confirmar la edicion del registro?");
             action = alert.showAndWait();
         }
         return action;

@@ -18,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -26,6 +27,7 @@ import org.aldairgonzalez.dao.Conexion;
 import org.aldairgonzalez.dto.CargoDTO;
 import org.aldairgonzalez.model.Cargo;
 import org.aldairgonzalez.system.Main;
+import org.aldairgonzalez.utils.SuperKinalAlert;
 
 /**
  * FXML Controller class
@@ -62,9 +64,11 @@ public class MenuCargosController implements Initializable {
              CargoDTO.getCargoDTO().setCargo((Cargo)tblCargos.getSelectionModel().getSelectedItem());
              stage.formCargoView(2);
         } else if(event.getSource() == btnEliminar){
-            int carId = ((Cargo)tblCargos.getSelectionModel().getSelectedItem()).getCargoId();
-            eliminarCargos(carId);
-            cargarListaCargos();
+           if(SuperKinalAlert.getInstance().mostrarAlertaConfirmacion(405).get() == ButtonType.OK){
+                int carId = ((Cargo)tblCargos.getSelectionModel().getSelectedItem()).getCargoId();
+                eliminarCargos(carId);
+                cargarListaCargos();
+           }
         } else if(event.getSource() == btnBuscar){
             tblCargos.getItems().clear();
             if(tfCargoId.getText().equals("")){
