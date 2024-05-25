@@ -41,6 +41,18 @@ public class SuperKinalAlert {
             alert.setHeaderText("Confirmacion de registro");
             alert.setContentText("El registro se ha creado con exito!!!!!");
             alert.showAndWait();
+        } else if(code == 602){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Usuario Incorrecto");
+            alert.setHeaderText("Usuario Incorrecto");
+            alert.setContentText("Verifique el Usuario");
+            alert.showAndWait();
+        } else if(code == 605){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Contraseña Incorrecta");
+            alert.setHeaderText("Contraseña Incorrecta");
+            alert.setContentText("Verifique la contraseña");
+            alert.showAndWait();
         }
     }
  

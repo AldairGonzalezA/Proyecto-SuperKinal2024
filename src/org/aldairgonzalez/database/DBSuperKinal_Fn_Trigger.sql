@@ -49,117 +49,58 @@ END $$
 DELIMITER ;
 
 delimiter $$
-create function fn_calcularTotal(factId int) returns decimal(10,2) deterministic
+create function fn_calcularTotal (factId int) returns decimal(10,2) deterministic
 begin
+ 
 	declare total decimal(10,2) default 0.0;
     declare precio decimal(10,2);
     declare i int default 1;
-    declare curFacId, curProId int;
-    DECLARE inicio DATE;
-    DECLARE final DATE;
-    DECLARE curPromoId INT;
-    DECLARE curFecIni, curFecFin, fechaFac DATE;
-    DECLARE producto INT;
-    
-    DECLARE cursorPromociones CURSOR FOR
-        SELECT P.promocionId, P.productoId, P.fechaInicio, P.fechaFinalizacion 
-        FROM Promociones P;
-        
-	declare cursorDetalleFactura cursor for
-		Select DF.facturaId from DetalleFactura DF;
-        
-	open cursorDetalleFactura;
-    open cursorPromociones;
-    
-    SELECT DF.productoId INTO producto
-    FROM DetalleFactura DF
-    LIMIT 1;
-    
-    totalLoop: LOOP
-		fetch cursorDetalleFactura into curFacId;
-        FETCH cursorPromociones INTO curPromoId, curProId, curFecIni, curFecFin;
-			if factId = curFacId then
-				IF producto = curProId THEN
-				if curPromoId is not null then
-					SET inicio = curFecIni;
-					SET final = curFecFin;
-					SET precio = (SELECT P.precioPromocion FROM Promociones P WHERE promocionId = curPromoId);
-					IF now() BETWEEN inicio AND final THEN
-					SET total = precio;
-					LEAVE totalLoop;
-					END IF;
-				else 
-					set precio = (select P.precioVentaUnitario from Productos P where P.productoId = curProId);
-					set total = total + precio;
-				end if;
-			END IF;
-            end if;
-        
-        if i = (select count(*) from detalleFactura) then
-			leave totalLoop;
-		end if;
-		set i = i + 1;
-    
-    END LOOP totalLoop;
-    CLOSE cursorPromociones;
-    close cursorDetalleFactura;
-    
-    call sp_asignarTotal(total, factId);
+    declare curFacturaId, curProductoId int;
+    declare curPromPrecio decimal(10,2);
+
+    declare cursorDetalleFactura cursor for 
+    select DF.facturaId , DF.productoId from DetalleFactura DF;
+ 
+    open cursorDetalleFactura;
+    totalLoop :loop
+ 
+    fetch cursorDetalleFactura into curFacturaId, curProductoId;
+    select PR.precioPromocion into curPromPrecio
+        from Promociones PR
+        where PR.productoId = curProductoId
+        and NOW() between PR.fechaInicio and PR.fechaFinalizacion
+        order by PR.fechaInicio desc
+        Limit 1;
+ 
+	if factId = curFacturaId then
+			if curPromPrecio is not null then
+				set precio = curPromPrecio;
+            else 
+				set precio = (select P.precioVentaUnitario from Productos P where P.productoId = curProductoId);
+			end if;
+        set total = total + precio;
+    end if;
+ 
+    if i = (select count(*) from detalleFactura) then
+		leave totalLoop;
+	end if;
+ 
+    set i = i + 1;
+    end loop totalLoop;
+ 
+    call sp_asignarTotalFactura(total, factId);
     return total;
 end $$
+delimiter ;
 
-DELIMITER $$
-CREATE PROCEDURE sp_asignarTotal(IN tot DECIMAL(10,2), IN factId INT)
-BEGIN 
-    UPDATE Facturas
-    SET total = tot * (1 + 0.12) 
-    WHERE facturaId = factId; 
-END $$
-DELIMITER ;
-
-DELIMITER $$
-CREATE FUNCTION fn_precioPromocion(factId INT) RETURNS DECIMAL(12,2) DETERMINISTIC
-BEGIN
-    DECLARE total DECIMAL(10,2) DEFAULT 0.0;
-    DECLARE precio DECIMAL(10,2);
-    DECLARE inicio DATE;
-    DECLARE final DATE;
-    DECLARE curProId, curPromoId INT;
-    DECLARE curFecIni, curFecFin, fechaFac DATE;
-    DECLARE producto INT;
-    
-    DECLARE cursorPromociones CURSOR FOR
-        SELECT P.promocionId, P.productoId, P.fechaInicio, P.fechaFinalizacion 
-        FROM Promociones P;
-    
-
-
-    SELECT DF.productoId, F.fecha INTO producto, fechaFac
-    FROM DetalleFactura DF
-    JOIN Facturas F ON F.facturaId = DF.facturaId
-    WHERE DF.facturaId = factId
-    LIMIT 1;
-
-    OPEN cursorPromociones;
-
-    totalLoop: LOOP
-        FETCH cursorPromociones INTO curPromoId, curProId, curFecIni, curFecFin;
-        IF producto = curProId THEN
-            SET inicio = curFecIni;
-            SET final = curFecFin;
-            SET precio = (SELECT P.precioPromocion FROM Promociones P WHERE promocionId = curPromoId);
-        END IF;
-        IF fechaFac BETWEEN inicio AND final THEN
-            SET total = precio;
-            LEAVE totalLoop;
-        END IF;
-    END LOOP totalLoop;
-    CLOSE cursorPromociones;
-
-    CALL sp_asignarPrecioPromo(factId, total);
-    RETURN total;
-END $$
-DELIMITER ;
+delimiter $$
+create procedure sp_asignarTotalFactura(in tot decimal(10,2), in facId int)
+begin 
+	update Facturas
+		set total = tot * (1 +  0.12) 
+			where facturaId = facId; 
+end $$
+delimiter ;
 
 DELIMITER $$
 create trigger tg_totalPrecio
@@ -170,3 +111,27 @@ begin
     set total = fn_calcularTotal(NEW.facturaId);
 end $$
 DELIMITER ; 
+
+delimiter $$
+create procedure sp_manejoStock(in proId int)
+begin
+	update Productos
+		set
+			cantidad = cantidad - 1
+            where productoId = proId;
+end$$
+delimiter ;
+
+delimiter $$
+create trigger tg_restarStock
+before insert on detalleFactura
+for each row
+begin
+    if (select P.cantidadStock from Productos P where productoId = NEW.productoId) = 0 then
+		signal sqlstate'45000'
+			set message_text="No esta el producto en Estock";
+    else
+		call sp_manejoStock(new.productoId);
+	end if;
+end $$
+delimiter ;

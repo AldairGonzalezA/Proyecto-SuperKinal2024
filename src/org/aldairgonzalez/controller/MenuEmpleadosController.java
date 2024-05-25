@@ -39,6 +39,7 @@ import org.aldairgonzalez.system.Main;
 public class MenuEmpleadosController implements Initializable {
 
     private Main stage;
+    private int op;
     private static Connection conexion = null;
     private static PreparedStatement statement = null;
     private static ResultSet resultSet = null;
@@ -74,7 +75,11 @@ public class MenuEmpleadosController implements Initializable {
                 cargarDatos();
             }
         }else if(event.getSource() == btnRegresar){
-            stage.menuPrincipalView();
+            if(op == 3){
+                stage.formularioUsuarioView();
+            }else {
+                stage.menuPrincipalView();
+            }
         }else if(event.getSource() == btnVaciar){
             vaciarCampos();
         }
@@ -295,6 +300,14 @@ public class MenuEmpleadosController implements Initializable {
 
     public void setStage(Main stage) {
         this.stage = stage;
+    }
+
+    public int getOp() {
+        return op;
+    }
+
+    public void setOp(int op) {
+        this.op = op;
     }
     
     

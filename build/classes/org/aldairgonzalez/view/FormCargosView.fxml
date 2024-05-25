@@ -32,7 +32,7 @@
             <TextArea fx:id="taDescripcionCargo" prefHeight="200.0" prefWidth="200.0" promptText="Descripcion del Cargo" wrapText="true" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Button fx:id="btnRegresar" layoutX="85.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="85.0" text="Regresar" />
-      <Button fx:id="btnGuardar" layoutX="309.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="86.0" text="Guardar" />
+      <Button fx:id="btnRegresar" layoutX="85.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="85.0" style="-fx-background-color: #012030;" text="Regresar" textFill="WHITE" />
+      <Button fx:id="btnGuardar" layoutX="309.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="86.0" style="-fx-background-color: #012030;" text="Guardar" textFill="#fffdfd" />
    </children>
 </AnchorPane>

@@ -540,7 +540,7 @@ begin
 		(factId, prodId);
 end $$
 DELIMITER ;
-
+call sp_agregarDetalleFactura(1,1);
 DELIMITER $$
 create procedure sp_listarDetalleFactura()
 begin
@@ -654,4 +654,27 @@ create procedure sp_eliminarDetalleCompra(in detCId int)
     delete from DetalleCompra 
 			where detalleCompraId = detCId;
     end $$
+DELIMITER ;
+
+DELIMITER $$
+create procedure sp_agregarUsuario(in usu varchar(30),in contra varchar(100), in nivel int,in empId int)
+begin
+	insert into Usuarios(usuario,contrasenia,nivelAccesoId,EmpleadoId)values
+		(usu,contra,nivel,empId);
+end $$
+DELIMITER ;
+
+DELIMITER $$
+create procedure sp_buscarUsuario(us varchar(30))
+begin
+	select * from Usuarios
+		where usuario = us;
+end $$
+DELIMITER ;
+
+DELIMITER $$
+create procedure sp_listarUsuario()
+begin
+	select * from NivelesAcceso;
+end $$
 DELIMITER ;

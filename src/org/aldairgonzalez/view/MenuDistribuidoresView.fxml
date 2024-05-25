@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1200.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="org.aldairgonzalez.controller.MenuDistribuidoresController">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.aldairgonzalez.controller.MenuDistribuidoresController">
    <children>
       <ImageView fitHeight="650.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -41,9 +40,9 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnAgregar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="59.0" prefWidth="191.0" text="Agregar" />
-            <Button fx:id="btnEditar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="59.0" prefWidth="193.0" text="Editar" GridPane.rowIndex="1" />
-            <Button fx:id="btnEliminar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="59.0" prefWidth="187.0" text="Eliminar" GridPane.rowIndex="2" />
+            <Button fx:id="btnAgregar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="59.0" prefWidth="191.0" style="-fx-background-color: #012030;" text="Agregar" textFill="WHITE" />
+            <Button fx:id="btnEditar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="59.0" prefWidth="193.0" style="-fx-background-color: #012030;" text="Editar" textFill="WHITE" GridPane.rowIndex="1" />
+            <Button fx:id="btnEliminar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="59.0" prefWidth="187.0" style="-fx-background-color: #012030;" text="Eliminar" textFill="WHITE" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <Button fx:id="btnRegresar" layoutX="58.0" layoutY="561.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="85.0" style="-fx-background-color: #012030; -fx-border-width: 2; -fx-background-radius: 10;" text="Regresar" textFill="#f9f7f7">

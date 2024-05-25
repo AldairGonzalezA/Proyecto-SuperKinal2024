@@ -17,6 +17,8 @@ import org.aldairgonzalez.controller.FormCargosController;
 import org.aldairgonzalez.controller.FormCategoriasProductoController;
 import org.aldairgonzalez.controller.FormClientesController;
 import org.aldairgonzalez.controller.FormDistribuidoresController;
+import org.aldairgonzalez.controller.FormularioUsuariosController;
+import org.aldairgonzalez.controller.LoginController;
 import org.aldairgonzalez.controller.MenuCargosController;
 import org.aldairgonzalez.controller.MenuCategoriaProductoController;
 import org.aldairgonzalez.controller.MenuClientesController;
@@ -42,7 +44,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         this.stage  = stage;
         stage.setTitle("Super Kinal APP");
-        menuPrincipalView();
+        loginView();
         stage.show();
     }
     
@@ -170,9 +172,10 @@ public class Main extends Application {
         }
     }
     
-    public void menuEmpleadosView(){
+    public void menuEmpleadosView(int op){
         try{
             MenuEmpleadosController menuEmpleadosView = (MenuEmpleadosController)switchScene("MenuEmpleadosView.fxml", 1200, 650);
+            menuEmpleadosView.setOp(op);
             menuEmpleadosView.setStage(this);
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -205,6 +208,25 @@ public class Main extends Application {
             System.out.println(e.getMessage());
         }
     }
+    
+    public void loginView(){
+        try{
+            LoginController loginView = (LoginController)switchScene("LoginView.fxml",450, 600);
+            loginView.setStage(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void formularioUsuarioView(){
+        try{
+            FormularioUsuariosController formularioUsuariosView = (FormularioUsuariosController)switchScene("FormularioUsuariosView.fxml",450,600);
+            formularioUsuariosView.setStage(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */

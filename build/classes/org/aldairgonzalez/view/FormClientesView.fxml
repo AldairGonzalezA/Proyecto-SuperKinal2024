@@ -38,7 +38,7 @@
             <TextField fx:id="tfNit" promptText="Nit" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <Button fx:id="btnAgregar" layoutX="309.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="85.0" text="Guardar" />
-      <Button fx:id="btnRegresar" layoutX="56.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="85.0" text="Regresar" />
+      <Button fx:id="btnAgregar" layoutX="309.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="85.0" style="-fx-background-color: #012030;" text="Guardar" textFill="WHITE" />
+      <Button fx:id="btnRegresar" layoutX="56.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="85.0" style="-fx-background-color: #012030;" text="Regresar" textFill="#fffefe" />
    </children>
 </AnchorPane>

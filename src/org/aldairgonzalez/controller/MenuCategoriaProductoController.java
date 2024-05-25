@@ -174,6 +174,8 @@ public class MenuCategoriaProductoController implements Initializable {
         return categorias;
     }
     
+    
+    
     public Main getStage() {
         return stage;
     }
