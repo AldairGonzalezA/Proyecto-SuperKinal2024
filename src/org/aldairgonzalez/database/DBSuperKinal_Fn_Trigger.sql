@@ -117,7 +117,7 @@ create procedure sp_manejoStock(in proId int)
 begin
 	update Productos
 		set
-			cantidad = cantidad - 1
+			cantidadStock = cantidadStock - 1
             where productoId = proId;
 end$$
 delimiter ;
