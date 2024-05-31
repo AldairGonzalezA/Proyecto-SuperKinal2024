@@ -111,3 +111,27 @@ begin
     set total = fn_calcularTotal(NEW.facturaId);
 end $$
 DELIMITER ; 
+
+delimiter $$
+create procedure sp_manejoStock(in proId int)
+begin
+	update Productos
+		set
+			cantidad = cantidad - 1
+            where productoId = proId;
+end$$
+delimiter ;
+
+delimiter $$
+create trigger tg_restarStock
+before insert on detalleFactura
+for each row
+begin
+    if (select P.cantidadStock from Productos P where productoId = NEW.productoId) = 0 then
+		signal sqlstate'45000'
+			set message_text="No esta el producto en Estock";
+    else
+		call sp_manejoStock(new.productoId);
+	end if;
+end $$
+delimiter ;

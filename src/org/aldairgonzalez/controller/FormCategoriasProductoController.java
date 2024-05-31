@@ -15,12 +15,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.aldairgonzalez.dao.Conexion;
 import org.aldairgonzalez.dto.CategoriaProductoDTO;
 import org.aldairgonzalez.model.CategoriaProducto;
 import org.aldairgonzalez.system.Main;
+import org.aldairgonzalez.utils.SuperKinalAlert;
 
 /**
  * FXML Controller class
@@ -56,12 +58,23 @@ public class FormCategoriasProductoController implements Initializable {
             stage.MenuCategoriaProductoView();
         } else if(event.getSource() == btnGuardar){
           if(op == 1){
-              agregarCategoria();
-              stage.MenuCategoriaProductoView();
+              if(!tfNombreCategoria.getText().isEmpty() && !taDescripcion.getText().isEmpty()){
+                  agregarCategoria();
+                  stage.MenuCategoriaProductoView();
+                  SuperKinalAlert.getInstance().mostrarAlertasInfo(401);
+              } else {
+                  SuperKinalAlert.getInstance().mostrarAlertasInfo(400);
+                  tfNombreCategoria.requestFocus();
+                  return;
+              }
           }else if(op == 2){
-              editarCategoria();
-              CategoriaProductoDTO.getCategoriaProductoDTO().setCategoriaProducto(null);
+              if(!tfNombreCategoria.getText().isEmpty() && !taDescripcion.getText().isEmpty()){
+                  if(SuperKinalAlert.getInstance().mostrarAlertaConfirmacion(500).get() == ButtonType.OK){
+                      editarCategoria();
+                      CategoriaProductoDTO.getCategoriaProductoDTO().setCategoriaProducto(null);
               stage.MenuCategoriaProductoView();
+                  }
+              }
           }
         }
     }

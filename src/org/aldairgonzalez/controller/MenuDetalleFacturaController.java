@@ -150,9 +150,9 @@ private Main stage;
     
     public int obtenerIndexEmpleado(){
         int index = 0;
-        for(int i = 0 ; i <  cmbEmpleados.getItems().size() ; i++){
+        for(int i = 0 ; i < cmbEmpleados.getItems().size() ; i++){
             String empleadoCmb = cmbEmpleados.getItems().get(i).toString();
-            String empleadoTbl = ((DetalleFactura)tblFacturas.getSelectionModel().getSelectedItem()).getEmpleado();
+            int empleadoTbl = ((DetalleFactura)tblFacturas.getSelectionModel().getSelectedItem()).getEmpleadoId();
             if(empleadoCmb.equals(empleadoTbl)){
                 index = i;
                 break;

@@ -31,8 +31,8 @@
         </columns>
       </TableView>
       <ComboBox fx:id="cmbEstatus" layoutX="33.0" layoutY="446.0" prefHeight="25.0" prefWidth="198.0" />
-      <Button fx:id="btnGuardar" layoutX="40.0" layoutY="487.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="37.0" prefWidth="115.0" text="Guardar" />
+      <Button fx:id="btnGuardar" layoutX="40.0" layoutY="487.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="37.0" prefWidth="115.0" style="-fx-background-color: #012030;" text="Guardar" textFill="WHITE" />
       <Button fx:id="btnRegresar" layoutX="40.0" layoutY="575.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="37.0" prefWidth="115.0" text="Regresar" />
-      <Button fx:id="btnVaciar" layoutX="193.0" layoutY="487.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="37.0" prefWidth="115.0" text="Vaciar Form" />
+      <Button fx:id="btnVaciar" layoutX="193.0" layoutY="487.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="37.0" prefWidth="115.0" style="-fx-background-color: #012030;" text="Vaciar Form" textFill="WHITE" />
    </children>
 </AnchorPane>

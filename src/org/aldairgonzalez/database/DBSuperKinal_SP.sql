@@ -247,7 +247,7 @@ create procedure sp_agregarEmpleados(in nomEmp varchar(30),in apeEmp varchar(30)
 			(nomEmp, apeEmp, sue, hoEn, hoSa, carId, encarId);
     end $$
 DELIMITER ;
-
+select * from Empleados;
 DELIMITER $$
 create procedure sp_listarEmpleados()
 	begin
@@ -659,19 +659,19 @@ DELIMITER ;
 DELIMITER $$
 create procedure sp_agregarUsuario(in usu varchar(30),in contra varchar(100), in nivel int,in empId int)
 begin
-	insert into Usuarios(usuario,contrasenia,nivelAccesoId,EmpleadoId)values
+	insert into Usuarios(ususario,contrasenia,nivelAccesoId,EmpleadoId)values
 		(usu,contra,nivel,empId);
 end $$
 DELIMITER ;
-
+call sp_agregarUsuario('agonzalez','1234');
 DELIMITER $$
 create procedure sp_buscarUsuario(us varchar(30))
 begin
 	select * from Usuarios
-		where usuario = us;
+		where ususario = us;
 end $$
 DELIMITER ;
-
+call sp_buscarUsuario('agonzalez');
 DELIMITER $$
 create procedure sp_listarUsuario()
 begin

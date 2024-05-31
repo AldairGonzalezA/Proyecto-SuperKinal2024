@@ -179,20 +179,20 @@ DELIMITER $$
 create procedure sp_eliminarCategoriaProductos(catProId int)
 begin 
 	delete from CategoriaProductos
-	where catProId = categoriaProductoId;
+	where categoriaProductoId = catProId;
 end $$
 DELIMITER ;
  
 DELIMITER $$
 create procedure sp_editarCategoriaProductos(catProId int,nomCat varchar(30),desCat varchar(100) )
 begin
-	update CategoriaProductos CP set
-		CP.nombreCategoria = nomCat,
-        CP.descripcionCategoria = desCat
-		where catProId = CP.categoriaProductosId;
+	update CategoriaProductos set
+		nombreCategoria = nomCat,
+        descrippcionCategoria = desCat
+		where categoriaProductoId = catProId;
 end$$
 DELIMITER ;
-
+call sp_editarCategoriaProductos(2,'Verdura', 'verdura');
  -- CRUD Distribuidores ////////////////////////////////////////////////////
 DELIMITER $$
 create procedure sp_agregarDistribuidor(nomDis varchar(30), dirDis varchar(200), nitDis varchar(15), telDis varchar(15),web varchar(50))
@@ -247,7 +247,7 @@ create procedure sp_agregarEmpleados(in nomEmp varchar(30),in apeEmp varchar(30)
 			(nomEmp, apeEmp, sue, hoEn, hoSa, carId, encarId);
     end $$
 DELIMITER ;
-
+select * from Empleados;
 DELIMITER $$
 create procedure sp_listarEmpleados()
 	begin
@@ -284,8 +284,8 @@ create procedure sp_editarEmpleados(in empId int, in nomEmp varchar(30),in apeEm
 		update Empleados
 			set 
             nombreEmpleado = nomEmp,
-            apeEmp = apellidoEmpleado,
-            sueldo = suel,
+            apellidoEmpleado = apeEmp,
+            sueldo = sue,
             horaEntrada = hoEn,
             horaSalida = hoSa,
             cargoId = carId,
@@ -659,19 +659,19 @@ DELIMITER ;
 DELIMITER $$
 create procedure sp_agregarUsuario(in usu varchar(30),in contra varchar(100), in nivel int,in empId int)
 begin
-	insert into Usuarios(usuario,contrasenia,nivelAccesoId,EmpleadoId)values
+	insert into Usuarios(ususario,contrasenia,nivelAccesoId,EmpleadoId)values
 		(usu,contra,nivel,empId);
 end $$
 DELIMITER ;
-
+call sp_agregarUsuario('agonzalez','1234');
 DELIMITER $$
 create procedure sp_buscarUsuario(us varchar(30))
 begin
 	select * from Usuarios
-		where usuario = us;
+		where ususario = us;
 end $$
 DELIMITER ;
-
+call sp_buscarUsuario('agonzalez');
 DELIMITER $$
 create procedure sp_listarUsuario()
 begin
