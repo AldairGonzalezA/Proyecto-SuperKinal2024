@@ -58,7 +58,7 @@
          <font>
             <Font name="Times New Roman" size="12.0" />
          </font></Button>
-      <Button fx:id="btnVaciar" layoutX="180.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="44.0" prefWidth="85.0" style="-fx-background-color: #012030;" text="Vaciar" textFill="WHITE">
+      <Button fx:id="btnVaciar" layoutX="161.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="44.0" prefWidth="85.0" style="-fx-background-color: #012030;" text="Vaciar" textFill="WHITE">
          <font>
             <Font name="Times New Roman" size="12.0" />
          </font></Button>
@@ -73,5 +73,10 @@
             <Image url="@../image/Lupa.png" />
          </image>
       </ImageView>
+      <Button fx:id="btnMostrarFactura" layoutX="263.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="44.0" prefWidth="85.0" style="-fx-background-color: #012030;" text="Ver Factura" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

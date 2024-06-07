@@ -58,7 +58,7 @@ create table Empleados (
 	constraint FK_Empleados_EncargadoId foreign key (encargadoId)
 		references Empleados (empleadoId)
 );
-select * from empleados;
+
 create table Facturas (
 	facturaId int not null auto_increment,
     fecha date not null,
@@ -149,7 +149,7 @@ create table NivelesAcceso(
 
 create table Usuarios(
 	usuarioId int not null auto_increment,
-    usuario varchar(30) not null,
+    ususario varchar(30) not null,
     contrasenia varchar(100) not null,
     nivelAccesoId int not null,
     empleadoId int not null,
@@ -159,3 +159,5 @@ create table Usuarios(
 	constraint FK_Usuarios_Empleados foreign key Usuarios(empleadoId)
 		references Empleados (empleadoId)
 );
+
+select * from Usuarios;

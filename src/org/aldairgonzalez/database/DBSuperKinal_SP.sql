@@ -678,3 +678,9 @@ begin
 	select * from NivelesAcceso;
 end $$
 DELIMITER ;
+
+select * from DetalleFactura DF
+join Productos P on DF.productoId = P.productoId
+join Facturas F on DF.facturaId = F.facturaId
+join Clientes C on F.clienteId = C.clienteId
+where F.facturaId = 12;

@@ -36,6 +36,7 @@ import org.aldairgonzalez.model.DetalleFactura;
 import org.aldairgonzalez.model.Empleado;
 import org.aldairgonzalez.model.Factura;
 import org.aldairgonzalez.model.Producto;
+import org.aldairgonzalez.report.GenerarReporte;
 import org.aldairgonzalez.system.Main;
 
 /**
@@ -58,7 +59,7 @@ private Main stage;
     @FXML
     TableColumn colFacturaId,colFecha,colHora,colCliente,colProducto,colEmpleado,colTotal;
     @FXML
-    Button btnRegresar, btnGuardar, btnVaciar, btnBuscar; 
+    Button btnRegresar, btnGuardar, btnVaciar, btnBuscar, btnMostrarFactura; 
     /**
      * Initializes the controller class.
      */
@@ -98,6 +99,8 @@ private Main stage;
             }
         } else if(event.getSource() == btnVaciar){
             vaciarCampos();
+        } else if(event.getSource() == btnMostrarFactura){
+            GenerarReporte.getInstance().generarFactura(Integer.parseInt(tfFacturaId.getText()));
         }
     }
     

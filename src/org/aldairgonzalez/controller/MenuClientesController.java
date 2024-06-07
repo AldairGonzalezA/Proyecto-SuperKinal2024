@@ -30,6 +30,7 @@ import javafx.stage.Stage;
 import org.aldairgonzalez.dao.Conexion;
 import org.aldairgonzalez.dto.ClienteDTO;
 import org.aldairgonzalez.model.Cliente;
+import org.aldairgonzalez.report.GenerarReporte;
 import org.aldairgonzalez.system.Main;
 import org.aldairgonzalez.utils.SuperKinalAlert;
 
@@ -51,7 +52,7 @@ public class MenuClientesController implements Initializable {
     @FXML
     TableColumn colClienteId,colNombre,colApellido,colTelefono,colDireccion, colNit;
     @FXML
-    Button btnRegresar, btnAgregar, btnEditar, btnEliminar, btnBuscar;
+    Button btnRegresar, btnAgregar, btnEditar, btnEliminar, btnBuscar, btnVerClientes;
     @FXML
     TextField tfClienteId;
     /**
@@ -102,6 +103,8 @@ public class MenuClientesController implements Initializable {
                 colDireccion.setCellValueFactory(new PropertyValueFactory<Cliente,String>("direccion"));
                 colNit.setCellValueFactory(new PropertyValueFactory<Cliente,String>("nit"));
             }
+        } else if(event.getSource() == btnVerClientes){
+            GenerarReporte.getInstance().generarClientes();
         }
         
     }
