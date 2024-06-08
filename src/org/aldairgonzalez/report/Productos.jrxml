@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Productos" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b0a0ed54-4e47-444b-bc02-81320f2781f3">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DBSuperKinal"/>
@@ -94,51 +94,59 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="110" splitType="Stretch">
 			<staticText>
-				<reportElement x="340" y="0" width="100" height="30" uuid="3e50a979-4d03-4d48-9e88-fefd17b17b28"/>
+				<reportElement x="330" y="20" width="129" height="40" uuid="3e50a979-4d03-4d48-9e88-fefd17b17b28"/>
 				<textElement textAlignment="Center">
-					<font size="18" isBold="true"/>
+					<font size="25" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Productos]]></text>
 			</staticText>
+			<image>
+				<reportElement x="110" y="0" width="100" height="110" uuid="7a433831-249c-43fc-b064-031e2b86c721"/>
+				<imageExpression><![CDATA["C:/Users/Compu Fire/OneDrive/Escritorio/Proyectos GIPHUB/Proyecto-SuperKinal2024/src/org/aldairgonzalez/image/Logo Kinal.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="30" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="13" width="780" height="17" backcolor="#E62320" uuid="2d2373d4-9240-4e38-856a-1d02dbc61b4e"/>
+			</rectangle>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="54" splitType="Stretch">
 			<staticText>
-				<reportElement x="50" y="20" width="100" height="30" uuid="65e152aa-26d6-48e6-8111-3c081b5d471e"/>
+				<reportElement x="50" y="20" width="80" height="30" uuid="65e152aa-26d6-48e6-8111-3c081b5d471e"/>
 				<text><![CDATA[Producto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="150" y="20" width="100" height="30" uuid="800d1012-ad52-4f8e-930f-c8aa3f395724"/>
+				<reportElement x="130" y="20" width="100" height="30" uuid="800d1012-ad52-4f8e-930f-c8aa3f395724"/>
 				<text><![CDATA[Descripcion]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="250" y="20" width="80" height="30" uuid="94e0e05b-aed6-4092-9b1b-7f0455e32117"/>
+				<reportElement x="230" y="20" width="80" height="30" uuid="94e0e05b-aed6-4092-9b1b-7f0455e32117"/>
 				<text><![CDATA[Stock]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="330" y="20" width="80" height="30" uuid="5caf258c-e10b-46f9-8957-ff2b783f4085"/>
+				<reportElement x="310" y="20" width="80" height="30" uuid="5caf258c-e10b-46f9-8957-ff2b783f4085"/>
 				<text><![CDATA[Venta Unitario]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="410" y="20" width="80" height="30" uuid="34167f99-094d-4287-8fad-f918e374194c"/>
+				<reportElement x="390" y="20" width="80" height="30" uuid="34167f99-094d-4287-8fad-f918e374194c"/>
 				<text><![CDATA[Venta Mayor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="550" y="24" width="100" height="30" uuid="fbb38a3f-5448-4b3b-afe8-fc85150d378d"/>
+				<reportElement x="530" y="20" width="100" height="30" uuid="fbb38a3f-5448-4b3b-afe8-fc85150d378d"/>
 				<text><![CDATA[Distribuidor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="490" y="20" width="60" height="30" uuid="d4849868-7a24-42f7-a773-762f3743544f"/>
+				<reportElement x="470" y="20" width="60" height="30" uuid="d4849868-7a24-42f7-a773-762f3743544f"/>
 				<text><![CDATA[Precio Compra]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="650" y="24" width="80" height="30" uuid="80c7bfa2-e0e1-4d32-a357-7c0aa57eb0e2"/>
+				<reportElement x="630" y="20" width="80" height="30" uuid="80c7bfa2-e0e1-4d32-a357-7c0aa57eb0e2"/>
 				<text><![CDATA[Categoria]]></text>
 			</staticText>
 		</band>
@@ -146,55 +154,55 @@
 	<detail>
 		<band height="70" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="2" width="50" height="30" uuid="c0acc0eb-7eec-40a4-8c8c-9f3067a2e0ae">
+				<reportElement x="0" y="20" width="50" height="30" uuid="c0acc0eb-7eec-40a4-8c8c-9f3067a2e0ae">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="de6eb81b-8470-434b-bba7-032f50ab50ec"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{productoId}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="50" y="0" width="80" height="30" uuid="d149fd7c-6dec-4599-b1af-ba4f66851ffa">
+				<reportElement x="50" y="20" width="80" height="30" uuid="d149fd7c-6dec-4599-b1af-ba4f66851ffa">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fad0e26a-ab20-4775-a15f-b84bb1895282"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{nombreProducto}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="150" y="0" width="80" height="30" uuid="309279c7-6988-469d-85ea-7c0318b166e7">
+				<reportElement x="130" y="21" width="80" height="30" uuid="309279c7-6988-469d-85ea-7c0318b166e7">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="dc3b203f-f709-4609-ad4f-6731325c1f4c"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{descripcionProducto}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="250" y="0" width="80" height="30" uuid="f77a8c21-359c-40dc-a23d-58b48a52f764">
+				<reportElement x="230" y="21" width="80" height="30" uuid="f77a8c21-359c-40dc-a23d-58b48a52f764">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0da3f4f3-7209-4cef-afd2-68c281cc32ef"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{cantidadStock}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="330" y="0" width="80" height="30" uuid="4c8c5b34-39c4-4ea8-a1b5-ee484c958767">
+				<reportElement x="310" y="20" width="80" height="30" uuid="4c8c5b34-39c4-4ea8-a1b5-ee484c958767">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="dfca8b54-5896-49f3-ae0c-b5c300dd4a5c"/>
 				</reportElement>
 				<textFieldExpression><![CDATA["Q." + $F{precioVentaUnitario}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="410" y="0" width="80" height="30" uuid="20987636-c9f5-482b-887c-a70157c402c9">
+				<reportElement x="390" y="20" width="80" height="30" uuid="20987636-c9f5-482b-887c-a70157c402c9">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2ba4cd31-c97d-4bdf-8c0a-0da56cab227f"/>
 				</reportElement>
 				<textFieldExpression><![CDATA["Q." + $F{precioVentaMayor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="550" y="0" width="100" height="30" uuid="959f2a23-ffd8-4fea-bf97-68df4e7b7a19">
+				<reportElement x="540" y="21" width="100" height="30" uuid="959f2a23-ffd8-4fea-bf97-68df4e7b7a19">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e42c4367-590c-43d1-857a-df6dfae6acf5"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{nombreDistribuidor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="480" y="0" width="70" height="30" uuid="6c1f2f2d-8dc8-4c35-8330-4a9e4f67f164">
+				<reportElement x="470" y="20" width="70" height="30" uuid="6c1f2f2d-8dc8-4c35-8330-4a9e4f67f164">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d3c539b7-c17b-4cc5-8be8-688a1554feeb"/>
 				</reportElement>
 				<textFieldExpression><![CDATA["Q." + $F{precioCompra}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="650" y="0" width="80" height="30" uuid="c9a8a68b-03ee-4c28-9249-ea05a35a752a">
+				<reportElement x="640" y="20" width="80" height="30" uuid="c9a8a68b-03ee-4c28-9249-ea05a35a752a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9c86b40c-a635-47fa-ac81-eef2bf541953"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{nombreCategoria}]]></textFieldExpression>
@@ -209,9 +217,10 @@
 		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="30" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="13" width="780" height="17" backcolor="#E62320" uuid="822a8461-75b2-4b40-9293-23a626048f57"/>
+			</rectangle>
+		</band>
 	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>

@@ -37,6 +37,7 @@ import org.aldairgonzalez.dao.Conexion;
 import org.aldairgonzalez.model.CategoriaProducto;
 import org.aldairgonzalez.model.Distribuidor;
 import org.aldairgonzalez.model.Producto;
+import org.aldairgonzalez.report.GenerarReporte;
 import org.aldairgonzalez.system.Main;
 
 /**
@@ -65,7 +66,7 @@ public class MenuProductosController implements Initializable {
     @FXML
     ImageView  imgMostar,imgCargar;
     @FXML
-    Button btnRegresar, btnGuardar, btnVaciar, btnBuscar;
+    Button btnRegresar, btnGuardar, btnVaciar, btnBuscar, btnVerProductos;
     /**
      * Initializes the controller class.
      */
@@ -120,6 +121,8 @@ public class MenuProductosController implements Initializable {
                 cargarDatosProductos();
                 vaciarCampos();
             }
+        } else if(event.getSource() == btnVerProductos){
+            GenerarReporte.getInstance().generarProductos();
         }
     }
     

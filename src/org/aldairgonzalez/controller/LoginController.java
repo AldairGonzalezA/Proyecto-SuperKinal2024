@@ -87,7 +87,7 @@ public class LoginController implements Initializable {
             
             while(resultSet.next()){
                 int usuarioId = resultSet.getInt("usuarioId");
-                String usuario_ = resultSet.getString("ususario");
+                String usuario_ = resultSet.getString("usuario");
                 String contra = resultSet.getString("contrasenia");
                 int nivel = resultSet.getInt("nivelAccesoId");
                 int empleadoId = resultSet.getInt("empleadoId");

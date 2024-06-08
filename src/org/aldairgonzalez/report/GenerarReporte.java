@@ -82,4 +82,23 @@ public class GenerarReporte {
             System.out.println(e.getMessage());
         }
     }
+    
+    public void generarProductos(){
+        try{
+            conexion = Conexion.getInstance().obtenerConexion();
+            InputStream jasperPath = GenerarReporte.class.getResourceAsStream("/org/aldairgonzalez/report/Productos.jasper");
+            JasperPrint reporte = JasperFillManager.fillReport(jasperPath,null,conexion);
+            Stage reportStage = new Stage();
+            JRViewerFX reporteViewer = new JRViewerFX(reporte);
+            Pane root = new Pane();
+            root.getChildren().add(reporteViewer);
+            reporteViewer.setPrefSize(842,595);
+            Scene scene = new Scene(root);
+            reportStage.setScene(scene);
+            reportStage.setTitle("Productos");
+            reportStage.show();
+        }catch(Exception e){
+           System.out.println(e.getMessage()); 
+        }
+    }
 }

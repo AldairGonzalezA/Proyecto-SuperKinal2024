@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Factura" pageWidth="400" pageHeight="800" columnWidth="360" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c65032a8-5ac3-417e-b0b1-464966b95001">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DBSuperKinal"/>
@@ -98,7 +98,7 @@ where F.facturaId = $P{factId}]]>
 		<band height="100" splitType="Stretch">
 			<image>
 				<reportElement x="10" y="0" width="110" height="100" uuid="0e8e3fb0-b580-456b-b9c2-ac0e783a32cf"/>
-				<imageExpression><![CDATA["C:/Users/Informatica/Desktop/Repositorios/Proyecto-SuperKinal2024/src/org/aldairgonzalez/image/icono.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["C:/Users/Compu Fire/OneDrive/Escritorio/Proyectos GIPHUB/Proyecto-SuperKinal2024/src/org/aldairgonzalez/image/Logo Kinal.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="120" y="20" width="220" height="70" uuid="e4963255-6f34-4bf9-9389-7cb069f51e66"/>
@@ -116,7 +116,7 @@ where F.facturaId = $P{factId}]]>
 				<textElement textAlignment="Center">
 					<font size="16"/>
 				</textElement>
-				<textFieldExpression><![CDATA[ "No.Factura : " + $F{facturaId}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["No.Factura : " + $F{facturaId}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="40" width="200" height="30" uuid="bf9d93f5-60f3-48b7-979f-2f0cf60ccc1b"/>
@@ -178,7 +178,7 @@ where F.facturaId = $P{factId}]]>
 				<reportElement x="230" y="0" width="100" height="20" uuid="637fbddf-2f30-424d-a007-e05e903bf340">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8aa684a5-c84c-4a48-b4ed-4c91bd7b6009"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[ "Q. " + $F{precioVentaUnitario}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Q. " + $F{precioVentaUnitario}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="20" y="0" width="31" height="20" uuid="be5ea0ae-b01b-412f-bbb7-bb8087f433e1"/>
